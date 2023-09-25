@@ -30,6 +30,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
+                                            Kelas
+                                        </div>
+                                        <div class="col">
+                                            : <?= $user['kelas']['namakelas']; ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
                                             Member Since
                                         </div>
                                         <div class="col">

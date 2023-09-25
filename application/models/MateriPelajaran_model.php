@@ -6,6 +6,7 @@ class MateriPelajaran_model extends CI_Model{
         // return $this->db->get('materipelajaran')->result_array();
         $this->db->select('*');
         $this->db->from('materipelajaran a'); 
+        if($this->session->userdata('role_id') == 3) $this->db->where('a.idkelas', $this->session->userdata('kelas'));
         $this->db->join('matapelajaran b', 'b.id=a.idmatapelajaran');
         $this->db->join('kelas c', 'c.idkelas=a.idkelas');
         $this->db->join('materipelajaran_detail d', 'd.idmateripelajaran=a.id');

@@ -3,12 +3,19 @@
 class DataSiswa_model extends CI_Model{
     public function getAllUser()
     {
-        return $this->db->get('user')->result_array();
+        return $this->db->get_where('user')->result_array();
+        
     }
 
     public function getAllSiswa()
     {
-        return $this->db->get_where('user', ['role_id'=> 3])->result_array();
+        $siswa = $this->db->get_where('user', ['role_id'=> 3, 'is_active' => 1])->result_array();
+        
+        for($i = 0; $i < count($siswa); ++$i) {
+            $siswa[$i]["kelas"] = $this->db->get_where('kelas', ['idkelas' => $siswa[$i]['idkelas']], 1)->row_array();
+            // $s["test"] = "true";
+        }
+        return $siswa;
     }
 
     public function tambahDataSiswa()
@@ -48,6 +55,10 @@ class DataSiswa_model extends CI_Model{
         ];
 
         $this->db->update('user', $data, ['id' => $id]);
+    }
+
+    public function ubahKelasSiswa($idsiswa, $idkelas) {
+        return $this->db->update('user', ["idkelas" => $idkelas], ["id" => $idsiswa]);
     }
 }
 

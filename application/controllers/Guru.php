@@ -6,14 +6,13 @@ class Guru extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Kelas_model');
         $this->load->model('MataPelajaran_model');
         $this->load->model('MateriPelajaran_model');
         $this->load->model('Ujian_model');
         $this->load->model('Soal_model');
-        $this->load->model('SoalTugas_model');
         $this->load->model('JawabanTugas_model');
         $this->load->model('Livestream_model');
+        $this->load->model('Kelas_model');
         $this->load->model('Tugas_model');
         $this->load->model('DataSiswa_model');
         $this->load->library('form_validation');
@@ -294,6 +293,7 @@ class Guru extends CI_Controller
         $data['kelas'] = $this->db->get('kelas')->result_array();
         // echo json_encode($data);die();
 
+        $this->form_validation->set_rules('idkelas', 'ID Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('tanggalujian', 'Tanggal Ujian', 'required');
         $this->form_validation->set_rules('waktumulai', 'Waktu Mulai', 'required');
@@ -704,9 +704,10 @@ class Guru extends CI_Controller
 
         $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
-        $this->form_validation->set_rules('judul', 'Judul', 'required');
-        $this->form_validation->set_rules('jenistugas', 'Jenis Tugas', 'required');
-        $this->form_validation->set_rules('nama_tugas', 'Nama', 'required');
+        $this->form_validation->set_rules('judul_tugas', 'Judul Tugas', 'required');
+        $this->form_validation->set_rules('jenis_tugas', 'Jenis Tugas', 'required');
+        $this->form_validation->set_rules('deskripsi_tugas', 'Deskripsi Tugas', 'required');
+        // $this->form_validation->set_rules('upload_tugas', 'Upload Tugas', 'required');
 
         if( $this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -715,17 +716,45 @@ class Guru extends CI_Controller
             $this->load->view('guru/tambah_tugas', $data);
             $this->load->view('templates/footer');    
         } else {
-            $this->Tugas_model->tambahTugas();
-            $this->session->set_flashdata('flash', 'Ditambahkan');
-            redirect('guru/tugas');
+            $config['upload_path']          = './upload_tugas/';
+            $config['allowed_types']        = 'gif|jpg|png|pdf';
+            $config['max_size']             = 100000000;
+            $config['max_width']            = 10000;
+            $config['max_height']           = 10000;
+
+            $this->load->library('upload', $config);
+            
+            if ( ! $this->upload->do_upload('upload_tugas'))
+            {
+                // $error = array('error' => $this->upload->display_errors());
+                
+                // $this->load->view('upload_form', $error);
+                echo json_encode($this->upload->display_errors());die();
+            } else {
+                // $data = array('upload_data' => $this->upload->data());
+
+                // $this->load->view('upload_success', $data);
+                $upload_tugas = $this->upload->data();
+                $data["upload"] = $upload_tugas;
+                $upload_tugas = $upload_tugas['file_name'];
+                // echo json_encode($data);die();
+                $this->Tugas_model->tambahTugas($upload_tugas);
+                $this->session->set_flashdata('flash', 'Ditambahkan');
+                redirect('guru/tugas');
+            }
+            
         }
     }
 
     public function hapus_tugas($id)
     {
+        $tugas = $this->Tugas_model->getTugasById($id);
+        unlink('./upload_tugas/'.$tugas["detail"]["upload_tugas"]);
         $this->Tugas_model->hapusTugas($id);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('guru/tugas');
+        
+        
     }
 
     public function detail_tugas($id)
@@ -757,9 +786,9 @@ class Guru extends CI_Controller
 
         $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
-        $this->form_validation->set_rules('judul', 'Judul', 'required');
-        $this->form_validation->set_rules('jenistugas', 'Jenis Tugas', 'required');
-        $this->form_validation->set_rules('nama_tugas', 'Nama', 'required');
+        $this->form_validation->set_rules('judul_tugas', 'Judul Tugas', 'required');
+        $this->form_validation->set_rules('jenis_tugas', 'Jenis Tugas', 'required');
+        $this->form_validation->set_rules('deskripsi_tugas', 'Deskripsi Tugas', 'required');
 
 		// echo json_encode($data['tugas']);die();
 
@@ -776,102 +805,6 @@ class Guru extends CI_Controller
         }
     }
 
-    public function soaltugas($id)
-    {
-        $data['title'] = 'Soal Tugas';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['soaltugas'] = $this->db->get_where('soaltugas', ["idtugas" => intval($id)])->result_array();
-        $data['idsoal'] = $id;
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('guru/soaltugas', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function tambah_soaltugas($id)
-    {
-        $data['title'] = 'Tambah Soal Tugas';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['idsoal'] = $id;
-        $data['jenissoal'] = $this->db->get_where('soaltugas', ['idtugas'=> $id])->row_array();
-        // echo json_encode($data['jenissoal']);die();
-
-        $this->form_validation->set_rules('idtugas', 'Id Tugas', 'required');
-        $this->form_validation->set_rules('jenissoal', 'Jenis Soal', 'required');
-        $this->form_validation->set_rules('soal', 'Soal', 'required');
-        if($this->input->post('jenissoal') === "Pilihan Ganda") {
-            $this->form_validation->set_rules('opsi1', 'Opsi 1', 'required');
-            $this->form_validation->set_rules('opsi2', 'Opsi 2', 'required');
-            $this->form_validation->set_rules('opsi3', 'Opsi 3', 'required');
-            $this->form_validation->set_rules('opsi4', 'Opsi 4', 'required');
-            $this->form_validation->set_rules('opsibenar', 'Opsi Benar', 'required');
-        }
-
-        if( $this->form_validation->run() == FALSE) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('guru/tambah_soaltugas', $data);
-            $this->load->view('templates/footer');    
-        } else {
-            $this->SoalTugas_model->tambahSoalTugas();
-            $this->session->set_flashdata('flash', 'Ditambahkan');
-            redirect('guru/soaltugas/'.$this->input->post('idtugas'));
-        }
-    }
-
-    public function hapus_soaltugas($idtugas, $id)
-    {
-        $this->SoalTugas_model->hapusSoalTugas($id);
-        $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('guru/soaltugas/'.$idtugas);
-    }
-
-    public function detail_soaltugas($id)
-    {
-        $data['title'] = 'Detail Soal Tugas';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['soaltugas'] = $this->SoalTugas_model->getSoalTugasById($id);
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('guru/detail_soaltugas', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function ubah_soaltugas($id)
-    {
-        $data['title'] = 'Ubah Soal Tugas';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['soaltugas'] = $this->SoalTugas_model->getSoalTugasById($id);
-
-        $this->form_validation->set_rules('idtugas', 'Id Tugas', 'required');
-        $this->form_validation->set_rules('jenissoal', 'Jenis Soal', 'required');
-        $this->form_validation->set_rules('soal', 'Soal', 'required');
-        if($this->input->post('jenissoal') === "Pilihan Ganda") {
-            $this->form_validation->set_rules('opsi1', 'Opsi 1', 'required');
-            $this->form_validation->set_rules('opsi2', 'Opsi 2', 'required');
-            $this->form_validation->set_rules('opsi3', 'Opsi 3', 'required');
-            $this->form_validation->set_rules('opsi4', 'Opsi 4', 'required');
-            $this->form_validation->set_rules('opsibenar', 'Opsi Benar', 'required');
-        }
-
-        if( $this->form_validation->run() == FALSE) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('guru/ubah_soaltugas', $data);
-            $this->load->view('templates/footer');    
-        } else {
-            $this->SoalTugas_model->ubahSoalTugas($id);
-            $this->session->set_flashdata('flash', 'Diubah');
-            redirect('guru/soaltugas/'.$this->input->post('idtugas'));
-        }
-    }
-
     private function nilai_siswa($idsiswa, $idujian) {
         $query = $this->Soal_model->getNilai($idsiswa, $idujian);
         // echo json_encode($query);die();
@@ -884,6 +817,38 @@ class Guru extends CI_Controller
         return $nilai;
     }
 
+    public function listSiswa() {
+        $data["title"] = "Daftar Siswa";
+        $data["user"] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data["siswa"] = $this->DataSiswa_model->getAllSiswa();
+        // echo json_encode($data);die();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('guru/list_siswa', $data);
+        $this->load->view('templates/footer');    
+    }
+
+    public function assignClass($idsiswa) {
+        $data["title"] = "Tambah Kelas Siswa";
+        $data["user"] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data["siswa"] = $this->DataSiswa_model->getUserById($idsiswa);
+
+        $this->form_validation->set_rules('idkelas', 'ID Kelas', 'required');
+        if($this->form_validation->run() == false) {
+            $data["kelas"] = $this->Kelas_model->getAllKelas();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('guru/ubahkelassiswa', $data);
+            $this->load->view('templates/footer');   
+        } else {
+            $this->DataSiswa_model->ubahKelasSiswa($data["siswa"]["id"], $this->input->post('idkelas', true));
+            $this->session->set_flashdata('flash', 'Diubah');
+            redirect('guru/listSiswa');
+        }
+    }
     
 
 }

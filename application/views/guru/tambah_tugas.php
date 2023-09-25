@@ -8,7 +8,8 @@
                     Form Tambah Tugas
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <!-- <form action="" method="post"> -->
+                    <?php echo form_open_multipart('');?>
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
                             <!-- <input type="number" name="idkelas" class="form-control" id="idkelas"> -->
@@ -30,24 +31,29 @@
                             <div class="form-text text-danger"><?= form_error('idmatapelajaran'); ?></div>
                         </div>
                         <div class="mb-3">
-                            <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" class="form-control" id="judul">
-                            <div class="form-text text-danger"><?= form_error('judul'); ?></div>
+                            <label for="judul_tugas" class="form-label">Judul Tugas</label>
+                            <input type="text" name="judul_tugas" class="form-control" id="judul_tugas">
+                            <div class="form-text text-danger"><?= form_error('judul_tugas'); ?></div>
                         </div>
                         <div class="mb-3">
-                            <label for="jenistugas" class="form-label">Jenis Tugas</label>
-                            <select class="form-control" name="jenistugas" id="jenistugas">
+                            <label for="jenis_tugas" class="form-label">Jenis Tugas</label>
+                            <select class="form-control" name="jenis_tugas" id="jenis_tugas">
                                 <option value="1">UTS</option>
                                 <option value="2">UAS</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_tugas" class="form-label">Nama Tugas</label>
-                            <input type="text" name="nama_tugas" class="form-control" id="nama_tugas">
-                            <div class="form-text text-danger"><?= form_error('nama_tugas'); ?></div>
+                            <label for="deskripsi_tugas" class="form-label">Deskripsi Tugas</label>
+                            <input type="text" name="deskripsi_tugas" class="form-control" id="deskripsi_tugas">
+                            <div class="form-text text-danger"><?= form_error('deskripsi_tugas'); ?></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="upload_tugas" class="form-label">Upload Tugas</label>
+                            <input type="file" name="upload_tugas" class="form-control" id="upload_tugas">
+                            <div class="form-text text-danger"><?= form_error('upload_tugas'); ?></div>
                         </div> 
                                
-                        <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data Tugas</button>
+                        <button type="submit" value="upload" class="btn btn-primary float-right">Tambah Data Tugas</button>
                     </form>
                 </div>
             </div>

@@ -12,8 +12,8 @@ class Siswa extends CI_Controller
         $this->load->model('JawabanTugas_model');
         $this->load->model('Ujian_model');
         $this->load->model('Soal_model');
-        $this->load->model('SoalTugas_model');
         $this->load->model('Livestream_model');
+        $this->load->model('Kelas_model');
         $this->load->model('DataSiswa_model');
         $this->load->model('Tugas_model');
         $this->load->library('form_validation');
@@ -23,6 +23,8 @@ class Siswa extends CI_Controller
     {
         $data['title'] = 'My Profile Siswa';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user']['kelas'] = $this->db->get_where('kelas', ['idkelas' => $data['user']['idkelas']])->row_array();
+        // echo json_encode($data['user']);die();
         
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -48,13 +50,10 @@ class Siswa extends CI_Controller
     {
         $data['title'] = 'Materi Pelajaran';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        
-        $this->db->select('*');
-        $this->db->from('materipelajaran a');
-        $this->db->join('materipelajaran_detail b', 'a.id=b.idmateripelajaran', 'join');
 
-        $data['materipelajaran'] = $this->db->get()->result_array();
-
+        // $data['materipelajarandetail'] = $this->db->get()->result_array();
+        $data['materipelajaran'] = $this->MateriPelajaran_model->getAllMateri();
+        // echo json_encode($data['materipelajaran']); die();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -66,7 +65,8 @@ class Siswa extends CI_Controller
     {
         $data['title'] = 'Detail Materi Pelajaran';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['materipelajaran'] = $this->MateriPelajaran_model->getMateriById($id);
+        // $data['materipelajaran'] = $this->MateriPelajaran_model->getMateriById($id);
+        $data['materipelajaran'] = $this->MateriPelajaran_model->getAllMateri($id);
 
         // echo json_encode($data); die();
 
@@ -82,15 +82,17 @@ class Siswa extends CI_Controller
         $data['title'] = 'Ujian';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->db->select("*");
-        $this->db->from("ujian");
-        $this->db->join("matapelajaran", "ujian.idmatapelajaran=matapelajaran.id");
-        $data['ujian'] = $this->db->get()->result_array();
+        // $this->db->select("*");
+        // $this->db->from("ujian");
+        // $this->db->join("matapelajaran", "ujian.idmatapelajaran=matapelajaran.id");
 
+        $data['ujian'] = $this->Ujian_model->getAllUjian();
+
+        // echo json_encode($data); die();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('siswa/ujian', $data);
+        $this->load->view('guru/ujian', $data);
         $this->load->view('templates/footer');
     }
 
@@ -146,10 +148,14 @@ class Siswa extends CI_Controller
         }
 
         $ujian = $this->Ujian_model->getUjianById($id);
+
+        date_default_timezone_set('Asia/Jakarta');
         if(strtotime(date('Y-m-d H:i:s')) < strtotime($ujian["waktumulai"])) {
             echo "Ujian belum dimulai";
             die();
         }
+        // echo json_encode($ujian);
+        // echo json_encode((date('Y-m-d H:i:s'))); die();
 
         $data['soal'] = $this->Soal_model->getSoalSiswa($id, $this->session->userdata("id"), $nomor-1);
         $data['soal']['nomor'] = $nomor;
@@ -158,7 +164,7 @@ class Siswa extends CI_Controller
             $data['jawaban'] = $data['jawaban'][0]["jawaban"];
         }
 
-        // echo json_encode($data);die();
+        // echo json_encode($data['soal']);die();
         
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -254,11 +260,25 @@ class Siswa extends CI_Controller
     {
         $data['title'] = 'Kelas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kelas'] = $this->Kelas_model->getAllKelas();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('siswa/kelas', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function detail_kelas($id)
+    {
+        $data['title'] = 'Detail Kelas';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kelas'] = $this->Kelas_model->getKelasById($id);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('siswa/detail_kelas', $data);
         $this->load->view('templates/footer');
     }
 
@@ -280,39 +300,15 @@ class Siswa extends CI_Controller
     {
         $data['title'] = 'Detail Tugas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['tugas'] = $this->Tugas_model->getTugasById($id);
+        // $data['tugas'] = $this->Tugas_model->getTugasById($id);
+
+        $data['tugas'] = $this->Tugas_model->getAllTugas($id);
         // echo json_encode($data);die();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('siswa/detail_tugas', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function soaltugas($id, $nomor = 1)
-    {
-        $data['title'] = 'Soal Tugas';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['soaltugas'] = $this->db->get_where('soaltugas', ["idtugas" => intval($id)])->result_array();
-        $data['idsoal'] = $id;
-        $data['all_soal'] = $this->SoalTugas_model->getAllSoalSiswa($id);
-        $data['soal'] = $this->SoalTugas_model->getSoalSiswa($id, $nomor-1);
-        $data['soal']['nomor'] = $nomor;
-        $data['jawaban'] = $this->JawabanTugas_model->get($data['soaltugas'][$nomor-1]['id'], $this->session->userdata('id'));
-        if($data['jawaban']) $data['jawaban'] = $data['jawaban'][0]['jawaban'];
-        // echo json_encode($data);die();
-        // echo json_encode($data['all_soal']);
-        // var_dump($data['soaltugas']);
-
-        if($nomor > count($data['all_soal'])) {
-            redirect(base_url("siswa/soaltugas/$id/1"));
-        }
-        
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('siswa/soaltugas', $data);
         $this->load->view('templates/footer');
     }
 

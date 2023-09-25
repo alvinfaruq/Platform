@@ -6,6 +6,7 @@ class Tugas_model extends CI_Model{
         // return $this->db->get('tugas')->result_array();
         $this->db->select('*');
         $this->db->from('tugas a'); 
+        if($this->session->userdata('role_id') == 3) $this->db->where('a.idkelas', $this->session->userdata('kelas'));
         $this->db->join('matapelajaran b', 'b.id=a.idmatapelajaran');
         $this->db->join('kelas c', 'c.idkelas=a.idkelas');
         $this->db->join('tugas_detail d', 'd.idtugas=a.id_tugas');
@@ -25,13 +26,13 @@ class Tugas_model extends CI_Model{
         }
     }
 
-    public function tambahTugas()
+    public function tambahTugas($file)
     {
         $data = [
             "idkelas" => $this->input->post('idkelas', true),
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
-            "judul" => $this->input->post('judul', true),
-            "jenistugas" => $this->input->post('jenistugas', true),
+            "judul_tugas" => $this->input->post('judul_tugas', true),
+            "jenis_tugas" => $this->input->post('jenis_tugas', true),
         ];
 
         $this->db->insert('tugas', $data);
@@ -39,7 +40,8 @@ class Tugas_model extends CI_Model{
 
         $data2 = [
 			"idtugas" => $id,
-            "nama_tugas" => $this->input->post('nama_tugas', true),
+            "deskripsi_tugas" => $this->input->post('deskripsi_tugas', true),
+            "upload_tugas" => $file
         ];
 
         $this->db->insert('tugas_detail', $data2);
@@ -56,7 +58,8 @@ class Tugas_model extends CI_Model{
         $detail=$this->db->get_where('tugas_detail', array ('idtugas' => intval($id)))->row_array();
         if(!$detail) {
 			$detail = array (
-                "nama" => "",
+                "deskripsi_tugas" => "",
+                "upload_tugas" => "",
             );
 		}
 		$tgs=$this->db->get_where('tugas', array ('id_tugas' => $id))->row_array();
@@ -71,15 +74,16 @@ class Tugas_model extends CI_Model{
         $data = [
             "idkelas" => $this->input->post('idkelas', true),
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
-            "judul" => $this->input->post('judul', true),
-            "jenistugas" => $this->input->post('jenistugas', true),
+            "judul_tugas" => $this->input->post('judul_tugas', true),
+            "jenis_tugas" => $this->input->post('jenis_tugas', true),
         ];
 
         $this->db->update('tugas', $data, ['id_tugas' => $id]);
 
         $data2 = [
             "idtugas" => $id,
-            "nama_tugas" => $this->input->post('nama_tugas', true),
+            "deskripsi_tugas" => $this->input->post('deskripsi_tugas', true),
+            "upload_tugas" => $this->input->post('upload_tugas', true),
         ];
         // echo json_encode($data2);die();
 

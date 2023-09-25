@@ -17,8 +17,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kelas</th>
                                     <th>Mata Pelajaran</th>
-                                    <th>Judul</th>
+                                    <th>Judul Tugas</th>
                                     <th>Jenis Tugas</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -27,12 +28,13 @@
                                 <?php $i=1; foreach( $tugas as $t ): ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
+                                        <td><?= $t['namakelas'] ?></td>
                                         <td><?= $t['nama'] ?></td>
-                                        <td><?= $t['judul'] ?></td>
-                                        <td><?= $t['jenistugas'] ?></td>
+                                        <td><?= $t['judul_tugas'] ?></td>
+                                        <td><?= $t['jenis_tugas'] ?></td>
                                         <td>
                                             <a href="<?= base_url(); ?>siswa/detail_tugas/<?= $t['id_tugas']; ?>" class="badge badge-primary float right">Detail</a>
-                                            <a href="<?= base_url(); ?>siswa/soaltugas/<?= $t['id_tugas']; ?>" class="badge badge-warning float right">Soal</a>
+                                            <a href="<?= base_url(); ?>siswa/soaltugas/<?= $t['id_tugas']; ?>" class="badge badge-warning float right">Submit</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

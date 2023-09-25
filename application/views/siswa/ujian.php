@@ -17,6 +17,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kelas</th>
                                     <th>Mata Pelajaran</th>
                                     <th>Tanggal Ujian</th>
                                     <th>Waktu Mulai</th>
@@ -29,6 +30,7 @@
                                 <?php $i=1; foreach( $ujian as $u ): ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
+                                        <td><?= $u['namakelas'] ?></td>
                                         <td><?= $u['nama'] ?></td>
                                         <td><?= $u['tanggalujian'] ?></td>
                                         <td><?= $u['waktumulai'] ?></td>

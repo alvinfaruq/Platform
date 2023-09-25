@@ -38,7 +38,7 @@
                                     <th>No</th>
                                     <th>Kelas</th>
                                     <th>Mata Pelajaran</th>
-                                    <th>Deskripsi</th>
+                                    <th>Deskripsi Mata Pelajaran</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>

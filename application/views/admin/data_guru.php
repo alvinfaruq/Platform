@@ -37,6 +37,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kelas</th>
                                     <th>NIP</th>
                                     <th>Nama</th>
                                     <th>Email</th>
@@ -50,6 +51,7 @@
                                 <?php $i=1; foreach( $user as $u ): ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
+                                        <td><?= $u['idkelas'] ?></td>
                                         <td><?= $u['number'] ?></td>
                                         <td><?= $u['name'] ?></td>
                                         <td><?= $u['email'] ?></td>

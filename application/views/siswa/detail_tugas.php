@@ -7,36 +7,44 @@
                 </div>
                 <div class="card-body">
                     <div class="w-50">
+                    <div class="row">
+                            <div class="col-4">
+                                Kelas
+                            </div>
+                            <div class="col">
+                            : <?= $tugas['namakelas']; ?>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 Mata Pelajaran
                             </div>
                             <div class="col">
-                                : <?= $tugas['matapelajaran']['nama'] ?>
+                                : <?= $tugas['nama'] ?>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
-                                Judul
+                            <div class="col-4">
+                                Judul Tugas
                             </div>
                             <div class="col">
-                                : <?= $tugas['tgs']['judul'] ?>
+                                : <?= $tugas['judul_tugas'] ?>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 Jenis Tugas
                             </div>
                             <div class="col">
-                                : <?= $tugas['tgs']['jenistugas'] ?>
+                                : <?= $tugas['jenis_tugas'] ?>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
-                                Nama Tugas
+                            <div class="col-4">
+                                Deskripsi Tugas
                             </div>
                             <div class="col">
-                                : <?= $tugas['detail']['nama']?>
+                                : <?= $tugas['deskripsi_tugas']?>
                             </div>
                         </div>
                     </div>

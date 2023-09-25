@@ -5,6 +5,7 @@ class MataPelajaran_model extends CI_Model{
     {
         $this->db->select('*');
         $this->db->from('matapelajaran a'); 
+        if($this->session->userdata('role_id') == 3) $this->db->where('a.idkelas', $this->session->userdata('kelas'));
         $this->db->join('kelas b', 'b.idkelas=a.idkelas');
         $query = $this->db->get ();
         return $query->result_array();

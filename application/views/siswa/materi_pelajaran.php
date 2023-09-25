@@ -16,20 +16,22 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                <th>No</th>
+                                    <th>Kelas</th>
+                                    <th>Mata Pelajaran</th>
                                     <th>Judul Materi</th>
-                                    <th>Materi</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; foreach( $materipelajaran as $m ): ?>
                                     <tr>
-                                        <td><?= $i++ ?></td>
+                                    <td><?= $i++ ?></td>
+                                        <td><?= $m['namakelas'] ?></td>
+                                        <td><?= $m['nama'] ?></td>
                                         <td><?= $m['judul'] ?></td>
-                                        <td><?= $m['materi'] ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>siswa/detail_materi_pelajaran/<?= $m['id']; ?>" class="badge badge-primary float right">Detail</a>
+                                            <a href="<?= base_url(); ?>siswa/detail_materi_pelajaran/<?= $m['idmateripelajaran']; ?>" class="badge badge-primary float right">Detail</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

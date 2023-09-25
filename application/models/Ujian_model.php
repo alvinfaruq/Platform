@@ -3,8 +3,10 @@
 class Ujian_model extends CI_Model{
     public function getAllUjian()
     {
+        // echo json_encode($this->session->userdata());die();
         $this->db->select('*');
         $this->db->from('ujian a'); 
+        if($this->session->userdata('role_id') == 3) $this->db->where('a.idkelas', $this->session->userdata('kelas'));
         $this->db->join("matapelajaran", "a.idmatapelajaran=matapelajaran.id");
         $this->db->join("kelas c", "c.idkelas=a.idkelas");
         $query = $this->db->get ();

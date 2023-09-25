@@ -19,7 +19,6 @@
 
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
-                            <!-- <input type="text" name="idkelas" class="form-control" id="idkelas" value=""> -->
                             <select class="form-control" name="idkelas" id="idkelas" <?= $matapelajaran['idkelas']; ?>>
                                 <?php foreach($kelas as $val){ ?>
                                     <option value="<?= $val['idkelas'] ?>" <?= $tugas['tgs']['idkelas']==$val['idkelas']?'selected':'' ?>><?= $val['namakelas'] ?></option>
@@ -27,11 +26,11 @@
                             </select>
                             <div class="form-text text-danger"><?= form_error('idkelas'); ?></div>
                         </div>
+
                         <div class="mb-3">
-                            <label for="judul" class="form-label">Mata Pelajaran</label>
+                            <label for="idmatapelajaran" class="form-label">Mata Pelajaran</label>
                             <select class="form-control" name="idmatapelajaran" id="idmatapelajaran">
                                 <?php foreach($matapelajaran as $val){ ?>
-                                    <!-- judul -->
                                     <option value="<?= $val['id'] ?>" <?= $tugas['matapelajaran']['id']==$val['id']?'selected':'' ?>><?= $val['nama'] ?></option>
                                 <?php } ?>
                             </select>
@@ -39,30 +38,31 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" class="form-control" id="judul" value="<?= $tugas['tgs']['judul']; ?>">
-                            <div class="form-text text-danger"><?= form_error('waktumulai'); ?></div>
+                            <label for="judul_tugas" class="form-label">Judul Tugas</label>
+                            <input type="text" name="judul_tugas" class="form-control" id="judul_tugas" value="<?= $tugas['tgs']['judul_tugas']; ?>">
+                            <div class="form-text text-danger"><?= form_error('judul_tugas'); ?></div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="jenistugas" class="form-label">Jenis Tugas</label>
-                            <select class="form-control" name="jenistugas" id="jenistugas" value="<?= $tugas['tgs']['jenistugas']; ?>">
+                            <label for="jenis_tugas" class="form-label">Jenis Tugas</label>
+                            <select class="form-control" name="jenis_tugas" id="jenis_tugas" value="<?= $tugas['tgs']['jenis_tugas']; ?>">
                                 <option value="1">UTS</option>
                                 <option value="2">UAS</option>
                             </select>
                         </div>
-
                         <div class="mb-3">
-                            <label for="nama_tugas" class="form-label">Nama Tugas</label>
-                            <input type="text" name="nama_tugas" class="form-control" id="nama_tugas" value="<?= $tugas['detail']['nama_tugas']; ?>">
-                            <div class="form-text text-danger"><?= form_error('nama_tugas'); ?></div>
+                            <label for="deskripsi_tugas" class="form-label">Deskripsi Tugas</label>
+                            <input type="text" name="deskripsi_tugas" class="form-control" id="deskripsi_tugas" value="<?= $tugas['detail']['deskripsi_tugas']; ?>">
+                            <div class="form-text text-danger"><?= form_error('deskripsi_tugas'); ?></div>
                         </div>
-
-
+                        <div class="mb-3">
+                            <label for="upload_tugas" class="form-label">Upload Tugas</label>
+                            <iframe src="<?= base_url('upload_tugas/').$tugas["detail"]['upload_tugas'] ?>" height="500px" width="800px"></iframe>
+                            <input type="file" name="upload_tugas" class="form-control" id="upload_tugas">
+                            <div class="form-text text-danger"><?= form_error('upload_tugas'); ?></div>
+                        </div>
                         <button type="submit" name="ubah" class="btn btn-primary float-right">Ubah Data Tugas</button>
-
                     </form>
-
                 </div>
             </div>
         </div>

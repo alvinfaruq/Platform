@@ -50,6 +50,7 @@
                                 <?php $i=1; foreach( $user as $u ): ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
+    
                                         <td><?= $u['number'] ?></td>
                                         <td><?= $u['name'] ?></td>
                                         <td><?= $u['email'] ?></td>

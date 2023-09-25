@@ -50,13 +50,13 @@
                                         <td><?= $i++ ?></td>
                                         <td><?= $t['namakelas'] ?></td>
                                         <td><?= $t['nama'] ?></td>
-                                        <td><?= $t['judul'] ?></td>
-                                        <td><?= $t['jenistugas'] ?></td>
+                                        <td><?= $t['judul_tugas'] ?></td>
+                                        <td><?= $t['jenis_tugas'] ?></td>
                                         <td>
                                             <a href="<?= base_url(); ?>guru/detail_tugas/<?= $t['id_tugas']; ?>" class="badge badge-primary float right">Detail</a>
                                             <a href="<?= base_url(); ?>guru/ubah_tugas/<?= $t['id_tugas']; ?>" class="badge badge-success float right">Ubah</a>
                                             <a href="<?= base_url(); ?>guru/hapus_tugas/<?= $t['id_tugas']; ?>" class="badge badge-danger float right" onclick="return confirm('yakin?');">Hapus</a>
-                                            <a href="<?= base_url(); ?>guru/soaltugas/<?= $t['id_tugas']; ?>" class="badge badge-warning float right">Soal</a>
+                                            <!-- <a href="<?= base_url(); ?>guru/soal_tugas/<?= $t['id_tugas']; ?>" class="badge badge-warning float right">Submit</a> -->
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -9,10 +9,18 @@
                     <div class="w-50">
                         <div class="row">
                             <div class="col-3">
+                                Kelas
+                            </div>
+                            <div class="col">
+                            : <?= $materipelajaran['namakelas']; ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
                                 Mata Pelajaran
                             </div>
                             <div class="col">
-                                : <?= $materipelajaran['mapel']['nama'] ?>
+                                : <?= $materipelajaran['nama'] ?>
                             </div>
                         </div>
                         <div class="row">
@@ -20,7 +28,7 @@
                                 Judul Materi
                             </div>
                             <div class="col">
-                                : <?= $materipelajaran['matpel']['judul'] ?>
+                                : <?= $materipelajaran['judul'] ?>
                             </div>
                         </div>
                         <div class="row">
@@ -28,7 +36,7 @@
                                 Materi
                             </div>
                             <div class="col">
-                                : <?= $materipelajaran['detail']['materi']?>
+                                : <?= $materipelajaran['materi']?>
                             </div>
                         </div>
                     </div>
