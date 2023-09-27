@@ -48,7 +48,7 @@
                             <div class="form-text text-danger"><?= form_error('deskripsi_tugas'); ?></div>
                         </div>
                         <div class="mb-3">
-                            <label for="upload_tugas" class="form-label">Upload Tugas</label>
+                            <label for="upload_tugas" class="form-label">Unggah File Tugas</label>
                             <input type="file" name="upload_tugas" class="form-control" id="upload_tugas">
                             <div class="form-text text-danger"><?= form_error('upload_tugas'); ?></div>
                         </div> 

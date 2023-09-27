@@ -17,19 +17,18 @@
 
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
-                            <!-- <input type="text" name="idkelas" class="form-control" id="idkelas" value=""> -->
-                            <select class="form-control" name="idkelas" id="idkelas" <?= $matapelajaran['idkelas']; ?>>
+                            <select class="form-control" name="idkelas" id="idkelas" <?= $ujian['idkelas']; ?>>
                                 <?php foreach($kelas as $val){ ?>
                                     <option value="<?= $val['idkelas'] ?>" <?= $ujian['idkelas']==$val['idkelas']?'selected':'' ?>><?= $val['namakelas'] ?></option>
                                 <?php } ?>
                             </select>
                             <div class="form-text text-danger"><?= form_error('idkelas'); ?></div>
                         </div>
+
                         <div class="mb-3">
                             <label for="judul" class="form-label">Mata Pelajaran</label>
                             <select class="form-control" name="idmatapelajaran" id="idmatapelajaran">
                                 <?php foreach($matapelajaran as $val){ ?>
-                                    <!-- judul -->
                                     <option value="<?= $val['id'] ?>" <?= $ujian['id_ujian']==$val['id']?'selected':'' ?>><?= $val['nama'] ?></option>
                                 <?php } ?>
                             </select>

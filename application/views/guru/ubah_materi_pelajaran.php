@@ -12,7 +12,7 @@
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
                             <!-- <input type="text" name="idkelas" class="form-control" id="idkelas" value=""> -->
-                            <select class="form-control" name="idkelas" id="idkelas" <?= $matapelajaran['idkelas']; ?>>
+                            <select class="form-control" name="idkelas" id="idkelas" <?= $materipelajaran['idkelas']; ?>>
                                 <?php foreach($kelas as $val){ ?>
                                     <option value="<?= $val['idkelas'] ?>" <?= $materipelajaran['idkelas']==$val['idkelas']?'selected':'' ?>><?= $val['namakelas'] ?></option>
                                 <?php } ?>

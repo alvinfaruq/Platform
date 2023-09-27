@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form action="" method="post">
                     <div>
-                            No Induk: <?= $siswa['number'] ?>
+                            NISN: <?= $siswa['number'] ?>
                         </div>
                         <div>
                             Nama: <?= $siswa['name'] ?>

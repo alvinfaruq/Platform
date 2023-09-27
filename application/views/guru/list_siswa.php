@@ -36,7 +36,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>No. Induk</th>
+                                    <th>NISN</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Opsi</th>

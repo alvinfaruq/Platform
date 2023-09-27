@@ -15,6 +15,16 @@
                             <div class="form-text text-danger"><?= form_error('idmatapelajaran'); ?></div>
                         </div>
                         <div class="mb-3">
+                            <label for="idkelas" class="form-label">Kelas</label>
+                            <!-- <input type="text" name="idkelas" class="form-control" id="idkelas" value=""> -->
+                            <select class="form-control" name="idkelas" id="idkelas" <?= $livestream['idkelas']; ?>>
+                                <?php foreach($kelas as $val){ ?>
+                                    <option value="<?= $val['idkelas'] ?>" <?= $livestream['idkelas']==$val['idkelas']?'selected':'' ?>><?= $val['namakelas'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <div class="form-text text-danger"><?= form_error('idkelas'); ?></div>
+                        </div>
+                        <div class="mb-3">
                             <label for="waktumulai" class="form-label">Waktu Mulai</label>
                             <input type="datetime-local" name="waktumulai" class="form-control" id="waktumulai" value="<?= $livestream['waktumulai']; ?>">
                             <div class="form-text text-danger"><?= form_error('waktumulai'); ?></div>

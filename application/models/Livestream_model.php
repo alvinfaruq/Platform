@@ -7,6 +7,7 @@ class Livestream_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('livestream a'); 
         $this->db->join('matapelajaran b', 'b.id=a.idmatapelajaran');
+        $this->db->join('kelas c', 'c.idkelas=a.idkelas');
         $query = $this->db->get ();
         return $query->result_array();
     }
@@ -14,6 +15,7 @@ class Livestream_model extends CI_Model{
     public function tambahLivestream($video)
     {
         $data = [
+            "idkelas" => $this->input->post('idkelas', true),
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
             "waktumulai" => $this->input->post('waktumulai', true),
             "waktuselesai" => $this->input->post('waktuselesai', true),
@@ -41,6 +43,7 @@ class Livestream_model extends CI_Model{
 
     public function ubahLivestream($id) {
         $data = [
+            "idkelas" => $this->input->post('idkelas', true),
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
             "waktumulai" => $this->input->post('waktumulai', true),
             "waktuselesai" => $this->input->post('waktuselesai', true),

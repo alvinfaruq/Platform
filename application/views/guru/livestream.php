@@ -37,6 +37,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kelas</th>
                                     <th>Mata Pelajaran</th>
                                     <th>Waktu Mulai</th>
                                     <th>Waktu Selesai</th>
@@ -48,6 +49,7 @@
                                 <?php $i=1; foreach( $livestream as $l ): ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
+                                        <td><?= $l['namakelas'] ?></td>
                                         <td><?= $l['nama'] ?></td>
                                         <td><?= $l['waktumulai'] ?></td>
                                         <td><?= $l['waktuselesai'] ?></td>

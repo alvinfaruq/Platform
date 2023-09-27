@@ -9,7 +9,6 @@
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
-
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
                             <!-- <input type="text" name="idkelas" class="form-control" id="idkelas" value=""> -->
@@ -20,7 +19,6 @@
                             </select>
                             <div class="form-text text-danger"><?= form_error('idkelas'); ?></div>
                         </div>
-
                         <div class="mb-3">
                             <label for="nama" class="form-label">Mata Pelajaran</label>
                             <input type="text" name="nama" class="form-control" id="nama" value="<?= $matapelajaran['nama']; ?>">

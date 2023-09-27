@@ -19,7 +19,7 @@
 
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
-                            <select class="form-control" name="idkelas" id="idkelas" <?= $matapelajaran['idkelas']; ?>>
+                            <select class="form-control" name="idkelas" id="idkelas" <?= $tugas['tgs']['idkelas']; ?>>
                                 <?php foreach($kelas as $val){ ?>
                                     <option value="<?= $val['idkelas'] ?>" <?= $tugas['tgs']['idkelas']==$val['idkelas']?'selected':'' ?>><?= $val['namakelas'] ?></option>
                                 <?php } ?>
@@ -56,7 +56,7 @@
                             <div class="form-text text-danger"><?= form_error('deskripsi_tugas'); ?></div>
                         </div>
                         <div class="mb-3">
-                            <label for="upload_tugas" class="form-label">Upload Tugas</label>
+                            <label for="upload_tugas" class="form-label">Unggah File Tugas</label>
                             <iframe src="<?= base_url('upload_tugas/').$tugas["detail"]['upload_tugas'] ?>" height="500px" width="800px"></iframe>
                             <input type="file" name="upload_tugas" class="form-control" id="upload_tugas">
                             <div class="form-text text-danger"><?= form_error('upload_tugas'); ?></div>

@@ -293,7 +293,7 @@ class Guru extends CI_Controller
         $data['kelas'] = $this->db->get('kelas')->result_array();
         // echo json_encode($data);die();
 
-        $this->form_validation->set_rules('idkelas', 'ID Kelas', 'required');
+        $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('tanggalujian', 'Tanggal Ujian', 'required');
         $this->form_validation->set_rules('waktumulai', 'Waktu Mulai', 'required');
@@ -431,6 +431,7 @@ class Guru extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
 
+        $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('waktumulai', 'Waktu Mulai', 'required');
         $this->form_validation->set_rules('waktuselesai', 'Waktu Selesai', 'required');
@@ -584,6 +585,7 @@ class Guru extends CI_Controller
         $data['livestream'] = $this->Livestream_model->getLivestreamById($id);
         // echo json_encode($data);die();
 
+        $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('waktumulai', 'Waktu Mulai', 'required');
         $this->form_validation->set_rules('waktuselesai', 'Waktu Selesai', 'required');

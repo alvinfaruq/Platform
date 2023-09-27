@@ -49,10 +49,10 @@
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                File
+                                Unggah File Tugas
                             </div>
                             <div class="col">
-                                <iframe src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px" width="800px" />
+                                : <iframe src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px" width="400px" ></iframe>
                             </div>
                         </div>
                     </div>

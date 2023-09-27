@@ -50,23 +50,24 @@ class MateriPelajaran_model extends CI_Model{
         $this->db->delete('materipelajaran', ['id' => $id]);
     }
 
-    // public function getMateriById($id)
-    // {
-    //     $detail=$this->db->get_where('materipelajaran_detail', array ('idmateripelajaran' => intval($id)))->row_array();
-    //     if(!$detail) {
-	// 		$detail = ["materi" => ""];
-	// 	}
-	// 	$matpel=$this->db->get_where('materipelajaran', array ('id' => $id))->row_array();
-    //     $mapel=$this->db->get_where('matapelajaran', array ('id' => $matpel["idmatapelajaran"]))->row_array();
-    //     return array (
-    //         'detail'=>$detail, 
-    //         'matpel'=>$matpel,
-    //         'mapel' => $mapel
-    //     );
-    // }
+    public function getMateriById($id)
+    {
+        $detail=$this->db->get_where('materipelajaran_detail', array ('idmateripelajaran' => intval($id)))->row_array();
+        if(!$detail) {
+			$detail = ["materi" => ""];
+		}
+		$matpel=$this->db->get_where('materipelajaran', array ('id' => $id))->row_array();
+        $mapel=$this->db->get_where('matapelajaran', array ('id' => $matpel["idmatapelajaran"]))->row_array();
+        return array (
+            'detail'=>$detail, 
+            'matpel'=>$matpel,
+            'mapel' => $mapel
+        );
+    }
 
     public function ubahMateriPelajaran($id) {
         $data = [
+            "idkelas" => $this->input->post('idkelas', true),
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
             "judul" => $this->input->post('judul', true),
         ];

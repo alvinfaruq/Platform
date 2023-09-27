@@ -9,6 +9,14 @@
                     <div class="w-50">
                         <div class="row">
                             <div class="col-3">
+                                Kelas
+                            </div>
+                            <div class="col">
+                            : <?= $livestream['namakelas']; ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
                                 Mata Pelajaran
                             </div>
                             <div class="col">
