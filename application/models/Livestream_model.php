@@ -1,15 +1,28 @@
 <?php 
 
 class Livestream_model extends CI_Model{
-    public function getAllLivestream()
+    public function getAllLivestream($id = NULL)
     {
         // return $this->db->get('livestream')->result_array();
         $this->db->select('*');
         $this->db->from('livestream a'); 
+        if($this->session->userdata('role_id') == 3) $this->db->where('a.idkelas', $this->session->userdata('kelas'));
         $this->db->join('matapelajaran b', 'b.id=a.idmatapelajaran');
         $this->db->join('kelas c', 'c.idkelas=a.idkelas');
-        $query = $this->db->get ();
-        return $query->result_array();
+        // $query = $this->db->get ();
+        // return $query->result_array();
+
+        if ($id !== NULL) {
+            $this->db->where('a.id', $id);
+        }
+    
+        $query = $this->db->get();
+    
+        if ($id !== NULL) {
+            return $query->row_array(); // Return a single row if id is provided
+        } else {
+            return $query->result_array(); // Return multiple rows if id is not provided
+        }
     }
 
     public function tambahLivestream($video)
@@ -23,6 +36,7 @@ class Livestream_model extends CI_Model{
         ];
 
         $this->db->insert('livestream', $data);
+        $id = $this->db->insert_id();
     }
 
     public function hapusLivestream($id)

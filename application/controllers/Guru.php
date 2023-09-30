@@ -136,6 +136,7 @@ class Guru extends CI_Controller
         $this->form_validation->set_rules('idmatapelajaran', 'Id Mata Pelajaran', 'required');
         $this->form_validation->set_rules('judul', 'Judul Materi', 'required');
         $this->form_validation->set_rules('materi', 'Materi', 'required');
+        // $this->form_validation->set_rules('upload_materi', 'Unggah Materi', 'required');
 
         if( $this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -144,9 +145,32 @@ class Guru extends CI_Controller
             $this->load->view('guru/tambah_materi_pelajaran', $data);
             $this->load->view('templates/footer');    
         } else {
-            $this->MateriPelajaran_model->tambahMateriPelajaran();
-            $this->session->set_flashdata('flash', 'Ditambahkan');
-            redirect('guru/materi_pelajaran');
+            $config['upload_path']          = './upload_materi/';
+            $config['allowed_types']        = 'gif|jpg|png|pdf';
+            $config['max_size']             = 100000000;
+            $config['max_width']            = 10000;
+            $config['max_height']           = 10000;
+
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('upload_materi'))
+            {
+                // $error = array('error' => $this->upload->display_errors());
+                
+                // $this->load->view('upload_form', $error);
+                echo json_encode($this->upload->display_errors());die();
+            } else {
+                // $data = array('upload_data' => $this->upload->data());
+
+                // $this->load->view('upload_success', $data);
+                $upload_materi = $this->upload->data();
+                $data["upload"] = $upload_materi;
+                $upload_materi = $upload_materi['file_name'];
+                // echo json_encode($data);die();
+                $this->MateriPelajaran_model->tambahMateriPelajaran($upload_materi);
+                $this->session->set_flashdata('flash', 'Ditambahkan');
+                redirect('guru/materi_pelajaran');
+            }
         }
     }
 
@@ -430,6 +454,7 @@ class Guru extends CI_Controller
         $data['title'] = 'Tambah Livestream';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
+        $data['kelas'] = $this->db->get('kelas')->result_array();
 
         $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
@@ -582,7 +607,10 @@ class Guru extends CI_Controller
     {
         $data['title'] = 'Ubah Livestream';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['livestream'] = $this->Livestream_model->getLivestreamById($id);
+        // $data['livestream'] = $this->Livestream_model->getLivestreamById($id);
+        $data['livestream'] = $this->Livestream_model->getAllLivestream($id);
+        $data['livestream'] = $this->db->get('livestream')->result_array();
+        $data['kelas'] = $this->db->get('kelas')->result_array();
         // echo json_encode($data);die();
 
         $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
@@ -709,7 +737,7 @@ class Guru extends CI_Controller
         $this->form_validation->set_rules('judul_tugas', 'Judul Tugas', 'required');
         $this->form_validation->set_rules('jenis_tugas', 'Jenis Tugas', 'required');
         $this->form_validation->set_rules('deskripsi_tugas', 'Deskripsi Tugas', 'required');
-        // $this->form_validation->set_rules('upload_tugas', 'Upload Tugas', 'required');
+        // $this->form_validation->set_rules('upload_tugas', 'Unggah Tugas', 'required');
 
         if( $this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -755,8 +783,6 @@ class Guru extends CI_Controller
         $this->Tugas_model->hapusTugas($id);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('guru/tugas');
-        
-        
     }
 
     public function detail_tugas($id)

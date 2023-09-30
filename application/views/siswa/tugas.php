@@ -34,7 +34,7 @@
                                         <td><?= $t['jenis_tugas'] ?></td>
                                         <td>
                                             <a href="<?= base_url(); ?>siswa/detail_tugas/<?= $t['id_tugas']; ?>" class="badge badge-primary float right">Detail</a>
-                                            <a href="<?= base_url(); ?>siswa/soaltugas/<?= $t['id_tugas']; ?>" class="badge badge-warning float right">Submit</a>
+                                            <a href="<?= base_url(); ?>siswa/submit_tugas/<?= $t['id_tugas']; ?>" class="badge badge-warning float right">Submit</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

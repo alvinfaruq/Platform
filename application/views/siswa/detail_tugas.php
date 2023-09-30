@@ -47,6 +47,14 @@
                                 : <?= $tugas['deskripsi_tugas']?>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Unggahan File Tugas
+                            </div>
+                            <div class="col">
+                                : <iframe src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px" width="400px" ></iframe>
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <a href="<?= base_url(); ?>siswa/tugas" class="btn btn-primary">Kembali</a>

@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="row mb-3">
-        <div class="col-md-6">
+        <div class="col-md-12">
 
             <div class="card">
                 <div class="card-header">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="upload_tugas" class="form-label">Unggah File Tugas</label>
-                            <iframe src="<?= base_url('upload_tugas/').$tugas["detail"]['upload_tugas'] ?>" height="500px" width="800px"></iframe>
+                            <iframe width="100%" src="<?= base_url('upload_tugas/').$tugas["detail"]['upload_tugas'] ?>" height="500px" width="400px"></iframe>
                             <input type="file" name="upload_tugas" class="form-control" id="upload_tugas">
                             <div class="form-text text-danger"><?= form_error('upload_tugas'); ?></div>
                         </div>

@@ -6,9 +6,9 @@
                     Detail Tugas
                 </div>
                 <div class="card-body">
-                    <div class="w-50">
+                    <div class="w-100">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 Kelas
                             </div>
                             <div class="col">
@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 Mata Pelajaran
                             </div>
                             <div class="col">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 Judul Tugas
                             </div>
                             <div class="col">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 Jenis Tugas
                             </div>
                             <div class="col">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 Deskripsi Tugas
                             </div>
                             <div class="col">
@@ -48,18 +48,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
-                                Unggah File Tugas
+                            <div class="col-3">
+                                Unggahan File Tugas
                             </div>
                             <div class="col">
-                                : <iframe src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px" width="400px" ></iframe>
+                                : <iframe width="100%" src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px"></iframe>
                             </div>
                         </div>
                     </div>
                     <div class="container-fluid">
                         <div class="card shadow mt-3">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tabel Nilai</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Tabel Jawaban Tugas</h6>
                             </div>
                         </div>
                         <div class="card-body shadow mb-3">
@@ -69,7 +69,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Siswa</th>
-                                            <th>Jawaban</th>
+                                            <th>Jawaban Tugas</th>
                                         </tr>
                                     </thead>
                                     <tbody>

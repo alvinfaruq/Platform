@@ -24,6 +24,17 @@
                             </select>
                             <div class="form-text text-danger"><?= form_error('idkelas'); ?></div>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="idmatapelajaran" class="form-label">Mata Pelajaran</label>
+                            <select class="form-control" name="idmatapelajaran" id="idmatapelajaran">
+                                <?php foreach($matapelajaran as $val){ ?>
+                                    <option value="<?= $val['id'] ?>" <?= $tugas['matapelajaran']['id']==$val['id']?'selected':'' ?>><?= $val['nama'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <div class="form-text text-danger"><?= form_error('nama'); ?></div>
+                        </div>
+                        
                         <div class="mb-3">
                             <label for="waktumulai" class="form-label">Waktu Mulai</label>
                             <input type="datetime-local" name="waktumulai" class="form-control" id="waktumulai" value="<?= $livestream['waktumulai']; ?>">

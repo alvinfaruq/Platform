@@ -12,7 +12,7 @@
                                 Kelas
                             </div>
                             <div class="col">
-                            : <?= $livestream['namakelas']; ?>
+                                : <?= $livestream['namakelas']; ?>
                             </div>
                         </div>
                         <div class="row">

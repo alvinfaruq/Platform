@@ -1,14 +1,15 @@
 <div class="container">
 
     <div class="row mb-3">
-        <div class="col-md-6">
+        <div class="col-md-12">
 
             <div class="card">
                 <div class="card-header">
                     Form Tambah Materi Pelajaran
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <!-- <form action="" method="post" > -->
+                    <?php echo form_open_multipart('');?>
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
                             <!-- <input type="number" name="idkelas" class="form-control" id="idkelas"> -->
@@ -37,8 +38,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="materi" class="form-label">Materi</label>
-                            <input type="text" name="materi" class="form-control" id="materi">
+                            <!-- <input type="text" name="materi" class="form-control" id="materi"> -->
+                            <textarea name="materi1" id="materi1" cols="30" rows="10"></textarea>
                             <div class="form-text text-danger"><?= form_error('materi'); ?></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="upload_materi" class="form-label">Unggah File Materi</label>
+                            <input type="file" name="upload_materi" class="form-control" id="upload_materi">
+                            <div class="form-text text-danger"><?= form_error('upload_materi'); ?></div>
                         </div>
                         <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data Materi Pelajaran</button>
                     </form>
@@ -47,3 +54,16 @@
         </div>
     </div>
 </div>
+
+<!-- <script type="text/javascript" src="<?= base_url('assets/ck/ckeditor.js'); ?>"></script> -->
+
+<script type="text/javascript">
+    CKEDITOR.replace( 'materi1' );
+    // CKEDITOR.replace('materi');
+//     $(window).on('load', function (){
+//     $( '#materi' ).ckeditor();
+// });
+// $('materi').ckeditor();
+</script>
+
+

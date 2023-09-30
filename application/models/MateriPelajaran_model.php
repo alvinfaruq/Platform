@@ -26,7 +26,7 @@ class MateriPelajaran_model extends CI_Model{
         }
     }
 
-    public function tambahMateriPelajaran()
+    public function tambahMateriPelajaran($file)
     {
         $data = [
             "idkelas" => $this->input->post('idkelas', true),
@@ -40,6 +40,7 @@ class MateriPelajaran_model extends CI_Model{
 		$data2 = [
 			"idmateripelajaran" => $id,
             "materi" => $this->input->post('materi', true),
+            "upload_materi" => $file
         ];
 
         $this->db->insert('materipelajaran_detail', $data2);
@@ -54,7 +55,10 @@ class MateriPelajaran_model extends CI_Model{
     {
         $detail=$this->db->get_where('materipelajaran_detail', array ('idmateripelajaran' => intval($id)))->row_array();
         if(!$detail) {
-			$detail = ["materi" => ""];
+			$detail = array (
+                "materi" => "",
+                "upload_materi" => "",
+            );
 		}
 		$matpel=$this->db->get_where('materipelajaran', array ('id' => $id))->row_array();
         $mapel=$this->db->get_where('matapelajaran', array ('id' => $matpel["idmatapelajaran"]))->row_array();
@@ -76,6 +80,7 @@ class MateriPelajaran_model extends CI_Model{
 
         $data2 = [
             "materi" => $this->input->post('materi', true),
+            "upload_materi" => $this->input->post('upload_materi', true),
         ];
 
         $this->db->update('materipelajaran_detail', $data2, ['idmateripelajaran' => $id]);

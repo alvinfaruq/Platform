@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="row mb-3">
-        <div class="col-md-6">
+        <div class="col-md-12">
 
             <div class="card">
                 <div class="card-header">
@@ -52,7 +52,6 @@
                             <input type="file" name="upload_tugas" class="form-control" id="upload_tugas">
                             <div class="form-text text-danger"><?= form_error('upload_tugas'); ?></div>
                         </div> 
-                               
                         <button type="submit" value="upload" class="btn btn-primary float-right">Tambah Data Tugas</button>
                     </form>
                 </div>
