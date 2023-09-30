@@ -6,9 +6,9 @@
                     Detail Materi Pelajaran
                 </div>
                 <div class="card-body">
-                    <div class="w-50">
+                    <div class="w-100">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Kelas
                             </div>
                             <div class="col">
@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Mata Pelajaran
                             </div>
                             <div class="col">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Judul Materi
                             </div>
                             <div class="col">
@@ -32,11 +32,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Materi
                             </div>
                             <div class="col">
                                 : <?= $materipelajaran['materi']?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                Unggahan File Materi
+                            </div>
+                            <div class="col">
+                                : <iframe width="100%" src="<?= base_url('upload_materi/').$materipelajaran['upload_materi'] ?>" height="500px"></iframe>
                             </div>
                         </div>
                     </div>
