@@ -130,8 +130,10 @@ class Guru extends CI_Controller
     {
         $data['title'] = 'Tambah Materi Pelajaran';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        // $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
-        $data['matapelajaran'] = $this->MataPelajaran_model->getAllMataPelajaran();
+
+        $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
+        // $data['matapelajaran'] = $this->MataPelajaran_model->getAllMataPelajaran();
+
         $data['kelas'] = $this->db->get('kelas')->result_array();
         // echo json_encode($data['matapelajaran']);die();
 
@@ -213,7 +215,7 @@ class Guru extends CI_Controller
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('judul', 'Judul Materi', 'required');
         $this->form_validation->set_rules('materi', 'Materi', 'required');
-        // $this->form_validation->set_rules('upload materi')
+        // $this->form_validation->set_rules('upload_materi', 'Unggah Materi', 'required');
 
         if( $this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);

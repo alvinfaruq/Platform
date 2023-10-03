@@ -79,8 +79,8 @@ class MateriPelajaran_model extends CI_Model{
         $this->db->update('materipelajaran', $data, ['id' => $id]);
 
         $data2 = [
+            "idmateripelajaran" => $id,
             "materi" => $this->input->post('materi', true),
-            // "upload_materi" => $this->input->post($file, true)
             "upload_materi" => $file
         ];
 

@@ -25,8 +25,10 @@
                             <!-- <input type="number" name="idmatapelajaran" class="form-control" id="idmatapelajaran"> -->
                             <select class="form-control" name="idmatapelajaran" id="idmatapelajaran">
                                 <?php foreach($matapelajaran as $val){ ?>
-                                    <option value="<?= $val['id'] ?>"><?= $val['namakelas'] ?> - <?= $val['nama'] ?></option>
-                                    <!-- <option value="<?= $val['id'] ?>"><?= $val['nama'] ?></option> -->
+
+                                    <!-- <option value="<?= $val['id'] ?>"><?= $val['namakelas'] ?> - <?= $val['nama'] ?></option> -->
+                                    <option value="<?= $val['id'] ?>"><?= $val['nama'] ?></option>
+
                                     <?php } ?>
                             </select>
                             <div class="form-text text-danger"><?= form_error('idmatapelajaran'); ?></div>
