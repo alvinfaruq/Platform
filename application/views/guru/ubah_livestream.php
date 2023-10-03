@@ -29,7 +29,7 @@
                             <label for="idmatapelajaran" class="form-label">Mata Pelajaran</label>
                             <select class="form-control" name="idmatapelajaran" id="idmatapelajaran">
                                 <?php foreach($matapelajaran as $val){ ?>
-                                    <option value="<?= $val['id'] ?>" <?= $tugas['matapelajaran']['id']==$val['id']?'selected':'' ?>><?= $val['nama'] ?></option>
+                                    <option value="<?= $val['id'] ?>" <?= $livestream['id_livestream']==$val['id']?'selected':'' ?>><?= $val['nama'] ?></option>
                                 <?php } ?>
                             </select>
                             <div class="form-text text-danger"><?= form_error('nama'); ?></div>
@@ -46,9 +46,9 @@
                             <div class="form-text text-danger"><?= form_error('waktuselesai'); ?></div>
                         </div>
                         <div class="mb-3" style="display: none;">
-                            <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" class="form-control" id="judul" value="<?= $livestream['judul']; ?>">
-                            <div class="form-text text-danger"><?= form_error('judul'); ?></div>
+                            <label for="video" class="form-label">Video</label>
+                            <input type="text" name="video" class="form-control" id="video" value="<?= $livestream['video']; ?>">
+                            <div class="form-text text-danger"><?= form_error('video'); ?></div>
                         </div>
                         <button type="submit" name="ubah" class="btn btn-primary float-right">Ubah Data Livestream</button>
                     </form>

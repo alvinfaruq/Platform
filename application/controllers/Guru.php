@@ -35,7 +35,7 @@ class Guru extends CI_Controller
         $data['title'] = 'Mata Pelajaran';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['matapelajaran'] = $this->MataPelajaran_model->getAllMapel();
-
+        // echo json_encode($data); die();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -77,7 +77,8 @@ class Guru extends CI_Controller
     {
         $data['title'] = 'Detail Mata Pelajaran';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['matapelajaran'] = $this->MataPelajaran_model->getMapelById($id);
+        $data['matapelajaran'] = $this->MataPelajaran_model->getAllMapel($id);
+        // echo json_encode($data); die();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -129,8 +130,10 @@ class Guru extends CI_Controller
     {
         $data['title'] = 'Tambah Materi Pelajaran';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
+        // $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
+        $data['matapelajaran'] = $this->MataPelajaran_model->getAllMataPelajaran();
         $data['kelas'] = $this->db->get('kelas')->result_array();
+        // echo json_encode($data['matapelajaran']);die();
 
         $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Id Mata Pelajaran', 'required');
@@ -210,6 +213,7 @@ class Guru extends CI_Controller
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('judul', 'Judul Materi', 'required');
         $this->form_validation->set_rules('materi', 'Materi', 'required');
+        // $this->form_validation->set_rules('upload materi')
 
         if( $this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -218,9 +222,34 @@ class Guru extends CI_Controller
             $this->load->view('guru/ubah_materi_pelajaran', $data);
             $this->load->view('templates/footer');    
         } else {
-            $this->MateriPelajaran_model->ubahMateriPelajaran($id);
-            $this->session->set_flashdata('flash', 'Diubah');
-            redirect('guru/materi_pelajaran');
+            $config['upload_path']          = './upload_materi/';
+            $config['allowed_types']        = 'gif|jpg|png|pdf';
+            $config['max_size']             = 100000000;
+            $config['max_width']            = 10000;
+            $config['max_height']           = 10000;
+
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('upload_materi'))
+            {
+                // $error = array('error' => $this->upload->display_errors());
+                
+                // $this->load->view('upload_form', $error);
+                // echo json_encode($this->upload->display_errors());die();
+                $this->session->set_flashdata('flash', 'Diubah');
+                redirect('guru/materi_pelajaran');
+            } else {
+                // $data = array('upload_data' => $this->upload->data());
+
+                // $this->load->view('upload_success', $data);
+                $upload_materi = $this->upload->data();
+                $data["upload"] = $upload_materi;
+                $upload_materi = $upload_materi['file_name'];
+                    
+                $this->MateriPelajaran_model->ubahMateriPelajaran($id, $upload_materi);
+                $this->session->set_flashdata('flash', 'Diubah');
+                redirect('guru/materi_pelajaran');
+            }
         }
     }
 
@@ -460,7 +489,7 @@ class Guru extends CI_Controller
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('waktumulai', 'Waktu Mulai', 'required');
         $this->form_validation->set_rules('waktuselesai', 'Waktu Selesai', 'required');
-        $this->form_validation->set_rules('judul', 'Judul', 'required');
+        $this->form_validation->set_rules('video', 'Video', 'required');
 
         if( $this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -592,9 +621,9 @@ class Guru extends CI_Controller
     {
         $data['title'] = 'Detail Livestream';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['livestream'] = $this->Livestream_model->getLivestreamById($id);
+        $data['livestream'] = $this->Livestream_model->getAllLivestream($id);
         // $data["mapel"] = $this->db->get_where('matapelajaran', ['id' => $data["livestream"]["idmatapelajaran"]])->row_array();
-        // echo json_encode($data['livestream']);die();
+        // echo json_encode($data);die();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -609,15 +638,15 @@ class Guru extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         // $data['livestream'] = $this->Livestream_model->getLivestreamById($id);
         $data['livestream'] = $this->Livestream_model->getAllLivestream($id);
-        $data['livestream'] = $this->db->get('livestream')->result_array();
+        $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
         $data['kelas'] = $this->db->get('kelas')->result_array();
-        // echo json_encode($data);die();
+        // echo json_encode($data['kelas']);die();
 
         $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('idmatapelajaran', 'Mata Pelajaran', 'required');
         $this->form_validation->set_rules('waktumulai', 'Waktu Mulai', 'required');
         $this->form_validation->set_rules('waktuselesai', 'Waktu Selesai', 'required');
-        $this->form_validation->set_rules('judul', 'Judul', 'required');
+        $this->form_validation->set_rules('video', 'Video', 'required');
 
         if( $this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -827,9 +856,33 @@ class Guru extends CI_Controller
             $this->load->view('guru/ubah_tugas', $data);
             $this->load->view('templates/footer');    
         } else {
-            $this->Tugas_model->ubahTugas($id);
-            $this->session->set_flashdata('flash', 'Diubah');
-            redirect('guru/tugas');
+            $config['upload_path']          = './upload_tugas/';
+            $config['allowed_types']        = 'gif|jpg|png|pdf';
+            $config['max_size']             = 100000000;
+            $config['max_width']            = 10000;
+            $config['max_height']           = 10000;
+
+            $this->load->library('upload', $config);
+            
+            if ( ! $this->upload->do_upload('upload_tugas'))
+            {
+                // $error = array('error' => $this->upload->display_errors());
+                
+                // $this->load->view('upload_form', $error);
+                echo json_encode($this->upload->display_errors());die();
+            } else {
+                // $data = array('upload_data' => $this->upload->data());
+
+                // $this->load->view('upload_success', $data);
+                $upload_tugas = $this->upload->data();
+                $data["upload"] = $upload_tugas;
+                $upload_tugas = $upload_tugas['file_name'];
+                // echo json_encode($data);die();
+                $this->Tugas_model->ubahTugas($id, $upload_tugas);
+                $this->session->set_flashdata('flash', 'Diubah');
+                redirect('guru/tugas');
+            }
+            
         }
     }
 

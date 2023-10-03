@@ -25,9 +25,9 @@
                             <!-- <input type="number" name="idmatapelajaran" class="form-control" id="idmatapelajaran"> -->
                             <select class="form-control" name="idmatapelajaran" id="idmatapelajaran">
                                 <?php foreach($matapelajaran as $val){ ?>
-                                    <!-- judul -->
-                                    <option value="<?= $val['id'] ?>"><?= $val['nama'] ?></option>
-                                <?php } ?>
+                                    <option value="<?= $val['id'] ?>"><?= $val['namakelas'] ?> - <?= $val['nama'] ?></option>
+                                    <!-- <option value="<?= $val['id'] ?>"><?= $val['nama'] ?></option> -->
+                                    <?php } ?>
                             </select>
                             <div class="form-text text-danger"><?= form_error('idmatapelajaran'); ?></div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="mb-3">
                             <label for="materi" class="form-label">Materi</label>
                             <!-- <input type="text" name="materi" class="form-control" id="materi"> -->
-                            <textarea name="materi1" id="materi1" cols="30" rows="10"></textarea>
+                            <textarea name="materi" id="materi" cols="30" rows="10"></textarea>
                             <div class="form-text text-danger"><?= form_error('materi'); ?></div>
                         </div>
                         <div class="mb-3">
@@ -58,7 +58,7 @@
 <!-- <script type="text/javascript" src="<?= base_url('assets/ck/ckeditor.js'); ?>"></script> -->
 
 <script type="text/javascript">
-    CKEDITOR.replace( 'materi1' );
+    CKEDITOR.replace( 'materi' );
     // CKEDITOR.replace('materi');
 //     $(window).on('load', function (){
 //     $( '#materi' ).ckeditor();

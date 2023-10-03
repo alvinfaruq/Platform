@@ -1,9 +1,29 @@
 <?php 
 
 class DataSiswa_model extends CI_Model{
-    public function getAllUser()
+    public function getAllUser($id = NULL)
     {
-        return $this->db->get_where('user')->result_array();
+        // return $this->db->get_where('user')->result_array();
+        $this->db->select('*');
+        $this->db->from('user a'); 
+        if($this->session->userdata('role_id') == 3) $this->db->where('a.idkelas', $this->session->userdata('kelas'));
+        // $this->db->join('matapelajaran b', 'b.id=a.idmatapelajaran');
+        $this->db->join('kelas c', 'c.idkelas=a.idkelas');
+        
+        // $query = $this->db->get ();
+        // return $query->result_array();
+
+        if ($id !== NULL) {
+            $this->db->where('a.id', $id);
+        }
+    
+        $query = $this->db->get();
+    
+        if ($id !== NULL) {
+            return $query->row_array(); // Return a single row if id is provided
+        } else {
+            return $query->result_array(); // Return multiple rows if id is not provided
+        }
         
     }
 
@@ -21,6 +41,7 @@ class DataSiswa_model extends CI_Model{
     public function tambahDataSiswa()
     {
         $data = [
+            "idkelas" => $this->input->post('idkelas', true),
             "number" => $this->input->post('number', true),
             "name" => $this->input->post('name', true),
             "email" => $this->input->post('email', true),
@@ -46,6 +67,7 @@ class DataSiswa_model extends CI_Model{
 
     public function ubahDataSiswa($id) {
         $data = [
+            "idkelas" => $this->input->post('idkelas', true),
             "number" => $this->input->post('number', true),
             "name" => $this->input->post('name', true),
             "email" => $this->input->post('email', true),

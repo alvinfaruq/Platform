@@ -69,7 +69,7 @@ class MateriPelajaran_model extends CI_Model{
         );
     }
 
-    public function ubahMateriPelajaran($id) {
+    public function ubahMateriPelajaran($id, $file) {
         $data = [
             "idkelas" => $this->input->post('idkelas', true),
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
@@ -80,7 +80,8 @@ class MateriPelajaran_model extends CI_Model{
 
         $data2 = [
             "materi" => $this->input->post('materi', true),
-            "upload_materi" => $this->input->post('upload_materi', true),
+            // "upload_materi" => $this->input->post($file, true)
+            "upload_materi" => $file
         ];
 
         $this->db->update('materipelajaran_detail', $data2, ['idmateripelajaran' => $id]);

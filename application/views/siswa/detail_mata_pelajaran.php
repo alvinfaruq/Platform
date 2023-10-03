@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <br>
-                    <a href="<?= base_url(); ?>guru/mata_pelajaran" class="btn btn-primary">Kembali</a>
+                    <a href="<?= base_url(); ?>siswa/mata_pelajaran" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
         </div>

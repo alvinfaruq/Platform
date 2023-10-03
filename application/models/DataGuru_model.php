@@ -9,7 +9,6 @@ class DataGuru_model extends CI_Model{
     public function tambahDataGuru()
     {
         $data = [
-            "idkelas" => $this->input->post('idkelas', true),
             "number" => $this->input->post('number', true),
             "name" => $this->input->post('name', true),
             "email" => $this->input->post('email', true),
@@ -35,7 +34,6 @@ class DataGuru_model extends CI_Model{
 
     public function ubahDataGuru($id) {
         $data = [
-            "idkelas" => $this->input->post('idkelas', true),
             "number" => $this->input->post('number', true),
             "name" => $this->input->post('name', true),
             "email" => $this->input->post('email', true),

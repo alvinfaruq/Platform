@@ -9,7 +9,8 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="" method="post">
+                    <!-- <form action="" method="post"> -->
+                    <?php echo form_open_multipart('');?>
 
                         <div class="mb-3" style="display: none;">
                             <label for="idmatapelajaran" class="form-label">Mata Pelajaran</label>

@@ -9,11 +9,12 @@ class Livestream_model extends CI_Model{
         if($this->session->userdata('role_id') == 3) $this->db->where('a.idkelas', $this->session->userdata('kelas'));
         $this->db->join('matapelajaran b', 'b.id=a.idmatapelajaran');
         $this->db->join('kelas c', 'c.idkelas=a.idkelas');
+        
         // $query = $this->db->get ();
         // return $query->result_array();
 
         if ($id !== NULL) {
-            $this->db->where('a.id', $id);
+            $this->db->where('a.id_livestream', $id);
         }
     
         $query = $this->db->get();
@@ -32,7 +33,7 @@ class Livestream_model extends CI_Model{
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
             "waktumulai" => $this->input->post('waktumulai', true),
             "waktuselesai" => $this->input->post('waktuselesai', true),
-            "judul" => $video,
+            "video" => $video,
         ];
 
         $this->db->insert('livestream', $data);
@@ -51,6 +52,7 @@ class Livestream_model extends CI_Model{
         $this->db->from('livestream');
         $this->db->where('id_livestream', $id);
         $this->db->join('matapelajaran', 'livestream.idmatapelajaran = matapelajaran.id');
+        $this->db->join('kelas', 'livestream.idkelas = kelas.idkelas');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -61,7 +63,7 @@ class Livestream_model extends CI_Model{
             "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
             "waktumulai" => $this->input->post('waktumulai', true),
             "waktuselesai" => $this->input->post('waktuselesai', true),
-            "judul" => $this->input->post('judul', true),
+            "video" => $this->input->post('video', true),
         ];
 
         $this->db->update('livestream', $data, ['id_livestream' => $id]);

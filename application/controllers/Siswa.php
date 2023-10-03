@@ -46,6 +46,20 @@ class Siswa extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function detail_mata_pelajaran($id)
+    {
+        $data['title'] = 'Detail Mata Pelajaran';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['matapelajaran'] = $this->MataPelajaran_model->getAllMapel($id);
+        // echo json_encode($data); die();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('siswa/detail_mata_pelajaran', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function materi_pelajaran()
     {
         $data['title'] = 'Materi Pelajaran';

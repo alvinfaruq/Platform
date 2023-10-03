@@ -41,7 +41,6 @@ class Admin extends CI_Controller
         $data['title'] = 'Tambah Data Guru';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('number', 'NIP', 'required');
         $this->form_validation->set_rules('name', 'Nama', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -91,7 +90,6 @@ class Admin extends CI_Controller
         $data['role'] = [1, 2, 3];
         $data['status'] = [1, 0];
 
-        $this->form_validation->set_rules('idkelas', 'Kelas', 'required');
         $this->form_validation->set_rules('name', 'Nama', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('image', 'Image', 'required');
@@ -116,8 +114,10 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Data Siswa';
         $data_user['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['user'] = $this->db->where('role_id', 3)->get('user')->result_array();
+        // $data['user'] = $this->db->where('role_id', 3)->get('user')->result_array();
+        $data['user'] = $this->DataSiswa_model->getAllUser();
 
+        // echo json_encode($data); die();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data_user);
@@ -129,6 +129,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Tambah Data Siswa';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kelas'] = $this->db->get('kelas')->result_array();
 
         $this->form_validation->set_rules('number', 'NISN', 'required');
         $this->form_validation->set_rules('name', 'Nama', 'required');
@@ -162,7 +163,8 @@ class Admin extends CI_Controller
     public function detail_data_siswa($id)
     {
         $data['title'] = 'Detail Data Siswa';
-        $data['user'] = $this->DataSiswa_model->getUserById($id);
+        $data['user'] = $this->DataSiswa_model->getAllUser($id);
+        $data['kelas'] = $this->db->get('kelas')->result_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -178,6 +180,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->DataSiswa_model->getUserById($id);
         $data['role'] = [1, 2, 3];
         $data['status'] = [1, 0];
+        $data['kelas'] = $this->db->get('kelas')->result_array();
 
         $this->form_validation->set_rules('name', 'Nama', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');

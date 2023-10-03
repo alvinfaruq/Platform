@@ -44,7 +44,7 @@
                                 Video
                             </div>
                             <div class="col-3">
-                                : <?= $livestream['judul'] ?>
+                                : <?= $livestream['video'] ?>
                             </div>
                         </div>
                     </div>        

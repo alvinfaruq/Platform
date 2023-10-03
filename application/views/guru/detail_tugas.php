@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="w-100">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Kelas
                             </div>
                             <div class="col">
@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Mata Pelajaran
                             </div>
                             <div class="col">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Judul Tugas
                             </div>
                             <div class="col">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Jenis Tugas
                             </div>
                             <div class="col">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Deskripsi Tugas
                             </div>
                             <div class="col">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 Unggahan File Tugas
                             </div>
                             <div class="col">

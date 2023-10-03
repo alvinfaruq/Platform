@@ -8,7 +8,8 @@
                     Form Ubah Materi Pelajaran
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <!-- <form action="" method="post"> -->
+                    <?php echo form_open_multipart('');?>
                         <div class="mb-3">
                             <label for="idkelas" class="form-label">Kelas</label>
                             <!-- <input type="text" name="idkelas" class="form-control" id="idkelas" value=""> -->
@@ -37,7 +38,7 @@
                         <div class="mb-3">
                             <label for="materi" class="form-label">Materi</label>
                             <!-- <input type="text" name="materi" class="form-control" id="materi" value="<?= $materipelajaran['materi']; ?>"> -->
-                            <textarea name="materi1" class="form-control" id="materi1" cols="30" rows="10"><?= $materipelajaran['materi']; ?>"</textarea>
+                            <textarea name="materi" class="form-control" id="materi" cols="30" rows="10"><?= $materipelajaran['materi']; ?></textarea>
                             <div class="form-text text-danger"><?= form_error('materi'); ?></div>
                         </div>
                         <div class="mb-3">
@@ -57,7 +58,7 @@
 <!-- <script type="text/javascript" src="<?= base_url('assets/ck/ckeditor.js'); ?>"></script> -->
 
 <script type="text/javascript">
-    CKEDITOR.replace( 'materi1' );
+    CKEDITOR.replace( 'materi' );
     // CKEDITOR.replace('materi');
 //     $(window).on('load', function (){
 //     $( '#materi' ).ckeditor();

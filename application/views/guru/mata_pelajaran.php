@@ -38,7 +38,7 @@
                                     <th>No</th>
                                     <th>Kelas</th>
                                     <th>Mata Pelajaran</th>
-                                    <th>Deskripsi Mata Pelajaran</th>
+                                    <!-- <th>Deskripsi Mata Pelajaran</th> -->
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -48,7 +48,7 @@
                                         <td><?= $i++ ?></td>
                                         <td><?= $m['namakelas'] ?></td>
                                         <td><?= $m['nama'] ?></td>
-                                        <td><?= $m['deskripsi'] ?></td>
+                                        <!-- <td><?= $m['deskripsi'] ?></td> -->
                                         <td>
                                             <a href="<?= base_url(); ?>guru/detail_mata_pelajaran/<?= $m['id']; ?>" class="badge badge-primary float right">Detail</a>
                                             <a href="<?= base_url(); ?>guru/ubah_mata_pelajaran/<?= $m['id']; ?>" class="badge badge-success float right">Ubah</a>

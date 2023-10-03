@@ -10,6 +10,16 @@
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="mb-3">
+                            <label for="idkelas" class="form-label">Kelas</label>
+                            <!-- <input type="text" name="idkelas" class="form-control" id="idkelas" value=""> -->
+                            <select class="form-control" name="idkelas" id="idkelas" <?= $user['idkelas']; ?>>
+                                <?php foreach($kelas as $val){ ?>
+                                    <option value="<?= $val['idkelas'] ?>" <?= $user['idkelas']==$val['idkelas']?'selected':'' ?>><?= $val['namakelas'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <div class="form-text text-danger"><?= form_error('idkelas'); ?></div>
+                        </div>
+                        <div class="mb-3">
                             <label for="number" class="form-label">NISN</label>
                             <input type="number" name="number" class="form-control" id="number" value="<?= $user['number']; ?>">
                             <div class="form-text text-danger"><?= form_error('number'); ?></div>

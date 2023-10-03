@@ -18,8 +18,8 @@
                                     <th>No</th>
                                     <th>Kelas</th>
                                     <th>Mata Pelajaran</th>
-                                    <th>Deskripsi Mata Pelajaran</th>
-                                    <!-- <th>Opsi</th> -->
+                                    <!-- <th>Deskripsi Mata Pelajaran</th> -->
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,7 +28,10 @@
                                         <td><?= $i++ ?></td>
                                         <td><?= $m['namakelas'] ?></td>
                                         <td><?= $m['nama'] ?></td>
-                                        <td><?= $m['deskripsi'] ?></td>
+                                        <!-- <td><?= $m['deskripsi'] ?></td> -->
+                                        <td>
+                                        <a href="<?= base_url(); ?>siswa/detail_mata_pelajaran/<?= $m['id']; ?>" class="badge badge-primary float right">Detail</a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

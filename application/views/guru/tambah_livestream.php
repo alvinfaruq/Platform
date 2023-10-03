@@ -43,9 +43,9 @@
                             <div class="form-text text-danger"><?= form_error('waktuselesai'); ?></div>
                         </div>
                         <div class="mb-3">
-                            <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" class="form-control" id="judul">
-                            <div class="form-text text-danger"><?= form_error('judul'); ?></div>
+                            <label for="video" class="form-label">Video</label>
+                            <input type="text" name="video" class="form-control" id="video">
+                            <div class="form-text text-danger"><?= form_error('video'); ?></div>
                         </div>
                         <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data Livestream</button>
                     </form>
