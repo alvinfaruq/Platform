@@ -535,7 +535,7 @@ class Guru extends CI_Controller
     
             $youtube = new Google_Service_YouTube($client);
     
-            $title = $this->input->post('judul');
+            $title = $this->input->post('video');
             $description = "";
             $dateStart = gmdate('Y-m-d\TH:i:s.u\Z');
             $dateEnd = date('Y-m-d\TH:i:s.u\Z', strtotime('+2 hour'));
