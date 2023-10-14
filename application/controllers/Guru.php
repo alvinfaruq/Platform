@@ -10,11 +10,11 @@ class Guru extends CI_Controller
         $this->load->model('MateriPelajaran_model');
         $this->load->model('Ujian_model');
         $this->load->model('Soal_model');
-        $this->load->model('JawabanTugas_model');
         $this->load->model('Livestream_model');
         $this->load->model('Kelas_model');
         $this->load->model('Tugas_model');
         $this->load->model('DataSiswa_model');
+        $this->load->model('UploadJawabanTugas_model');
         $this->load->library('form_validation');
     }
 
@@ -238,6 +238,7 @@ class Guru extends CI_Controller
                 
                 // $this->load->view('upload_form', $error);
                 // echo json_encode($this->upload->display_errors());die();
+                $this->MateriPelajaran_model->ubahMateriPelajaran($id);
                 $this->session->set_flashdata('flash', 'Diubah');
                 redirect('guru/materi_pelajaran');
             } else {
@@ -823,7 +824,7 @@ class Guru extends CI_Controller
         // $data['tugas'] = $this->Tugas_model->getTugasById($id);
 
         $data['tugas'] = $this->Tugas_model->getAllTugas($id);
-        $data['jawaban'] =  $this->JawabanTugas_model->getAll($id);
+        $data['jawaban'] =  $this->UploadJawabanTugas_model->getAllJawabanTugas();
         // echo json_encode($data);die();
 
         $this->load->view('templates/header', $data);
@@ -838,7 +839,7 @@ class Guru extends CI_Controller
         $data['title'] = 'Ubah Tugas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
-        $data['tugas'] = $this->Tugas_model->getTugasById($id);
+        $data['tugas'] = $this->Tugas_model->getAllTugas($id);
         $data['matapelajaran'] = $this->db->get('matapelajaran')->result_array();
         $data['kelas'] = $this->db->get('kelas')->result_array();
         // echo json_encode($data);die();
@@ -871,7 +872,10 @@ class Guru extends CI_Controller
                 // $error = array('error' => $this->upload->display_errors());
                 
                 // $this->load->view('upload_form', $error);
-                echo json_encode($this->upload->display_errors());die();
+                // echo json_encode($this->upload->display_errors());die();
+                $this->Tugas_model->ubahTugas($id);
+                $this->session->set_flashdata('flash', 'Diubah');
+                redirect('guru/tugas');
             } else {
                 // $data = array('upload_data' => $this->upload->data());
 

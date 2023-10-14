@@ -69,22 +69,40 @@ class MateriPelajaran_model extends CI_Model{
         );
     }
 
-    public function ubahMateriPelajaran($id, $file) {
-        $data = [
-            "idkelas" => $this->input->post('idkelas', true),
-            "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
-            "judul" => $this->input->post('judul', true),
-        ];
-
-        $this->db->update('materipelajaran', $data, ['id' => $id]);
-
-        $data2 = [
-            "idmateripelajaran" => $id,
-            "materi" => $this->input->post('materi', true),
-            "upload_materi" => $file
-        ];
-
-        $this->db->update('materipelajaran_detail', $data2, ['idmateripelajaran' => $id]);
+    public function ubahMateriPelajaran($id, $file = NULL) {
+        if ($file !== NULL) {
+            $data = [
+                "idkelas" => $this->input->post('idkelas', true),
+                "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
+                "judul" => $this->input->post('judul', true),
+            ];
+    
+            $this->db->update('materipelajaran', $data, ['id' => $id]);
+    
+            $data2 = [
+                "idmateripelajaran" => $id,
+                "materi" => $this->input->post('materi', true),
+                "upload_materi" => $file
+            ];
+    
+            $this->db->update('materipelajaran_detail', $data2, ['idmateripelajaran' => $id]);
+        } else {
+            $data = [
+                "idkelas" => $this->input->post('idkelas', true),
+                "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
+                "judul" => $this->input->post('judul', true),
+            ];
+    
+            $this->db->update('materipelajaran', $data, ['id' => $id]);
+    
+            $data2 = [
+                "idmateripelajaran" => $id,
+                "materi" => $this->input->post('materi', true),
+                // "upload_materi" => $file
+            ];
+    
+            $this->db->update('materipelajaran_detail', $data2, ['idmateripelajaran' => $id]);
+        }
 
     }
 

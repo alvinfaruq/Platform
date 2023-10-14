@@ -70,27 +70,50 @@ class Tugas_model extends CI_Model{
         );
     }
 
-    public function ubahTugas($id, $file) {
-        $data = [
-            "idkelas" => $this->input->post('idkelas', true),
-            "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
-            "judul_tugas" => $this->input->post('judul_tugas', true),
-            "jenis_tugas" => $this->input->post('jenis_tugas', true),
-        ];
-
-        $this->db->update('tugas', $data, ['id_tugas' => $id]);
-
-        $data2 = [
-            // "idtugas" => $id,
-            "deskripsi_tugas" => $this->input->post('deskripsi_tugas', true),
-            // "upload_tugas" => $this->input->post('upload_tugas', true),
-            "upload_tugas" => $file
-        ];
-        // echo json_encode($data2);die();
-
-        $this->db->update('tugas_detail', $data2, ['idtugas' => $id]);
-
-		// echo json_encode([$data, $data2]);die();
+    public function ubahTugas($id, $file = NULL) {
+        if ($file !== NULL) {
+            $data = [
+                "idkelas" => $this->input->post('idkelas', true),
+                "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
+                "judul_tugas" => $this->input->post('judul_tugas', true),
+                "jenis_tugas" => $this->input->post('jenis_tugas', true),
+            ];
+    
+            $this->db->update('tugas', $data, ['id_tugas' => $id]);
+    
+            $data2 = [
+                // "idtugas" => $id,
+                "deskripsi_tugas" => $this->input->post('deskripsi_tugas', true),
+                // "upload_tugas" => $this->input->post('upload_tugas', true),
+                "upload_tugas" => $file
+            ];
+            // echo json_encode($data2);die();
+    
+            $this->db->update('tugas_detail', $data2, ['idtugas' => $id]);
+    
+            // echo json_encode([$data, $data2]);die();
+        } else {
+            $data = [
+                "idkelas" => $this->input->post('idkelas', true),
+                "idmatapelajaran" => $this->input->post('idmatapelajaran', true),
+                "judul_tugas" => $this->input->post('judul_tugas', true),
+                "jenis_tugas" => $this->input->post('jenis_tugas', true),
+            ];
+    
+            $this->db->update('tugas', $data, ['id_tugas' => $id]);
+    
+            $data2 = [
+                // "idtugas" => $id,
+                "deskripsi_tugas" => $this->input->post('deskripsi_tugas', true),
+                // "upload_tugas" => $this->input->post('upload_tugas', true),
+                // "upload_tugas" => $file
+            ];
+            // echo json_encode($data2);die();
+    
+            $this->db->update('tugas_detail', $data2, ['idtugas' => $id]);
+    
+            // echo json_encode([$data, $data2]);die();
+        }
     }
 }
 

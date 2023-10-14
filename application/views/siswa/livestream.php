@@ -31,7 +31,7 @@
                                         <td><?= $l['nama'] ?></td>
                                         <td><?= $l['waktumulai'] ?></td>
                                         <td><?= $l['waktuselesai'] ?></td>
-                                        <td><?= $l['judul'] ?></td>
+                                        <td><?= $l['video'] ?></td>
                                         <td>
                                             <a href="<?= base_url(); ?>siswa/detail_livestream/<?= $l['id_livestream']; ?>" class="badge badge-primary float right">Detail</a>
                                         </td>

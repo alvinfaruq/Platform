@@ -56,12 +56,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="container-fluid">
                         <div class="card shadow mt-3">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tabel Jawaban Tugas</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Tabel Penilaian Tugas</h6>
                             </div>
                         </div>
+
                         <div class="card-body shadow mb-3">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -70,18 +72,20 @@
                                             <th>No</th>
                                             <th>Nama Siswa</th>
                                             <th>Jawaban Tugas</th>
+                                            <th>Nilai</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; foreach($jawaban as $j) { ?>
                                             <tr>
                                                 <td><?= $i ?></td>
-                                                <?php ($j['jawaban']); ?>
-                                                <td><?= $j["siswa"]->name ?></td>
+                                                <?php ($j); ?>
+                                                <td><?= $j['name'] ?></td>
                                                 <td>
-                                                    <?php foreach($j['jawaban'] as $jw) { ?>
+                                                    <!-- <?php foreach($j['jawaban'] as $jw) { ?>
                                                         <?= $jw['jawaban'] ?>
-                                                    <?php } ?>
+                                                    <?php } ?> -->
+                                                    <a href="<?= base_url('upload_jawaban_tugas/').$j['upload_jawaban_tugas'] ?>"><?= $j['upload_jawaban_tugas'] ?></a>
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -89,9 +93,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>  
+                        </div>
+
                         <a href="<?= base_url(); ?>guru/tugas" class="btn btn-primary">Kembali</a>
                     </div>
+                    
                 </div>
             </div>
         </div>

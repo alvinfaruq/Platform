@@ -9,14 +9,15 @@ class Siswa extends CI_Controller
         $this->load->model('MataPelajaran_model');
         $this->load->model('MateriPelajaran_model');
         $this->load->model('Jawaban_model');
-        $this->load->model('JawabanTugas_model');
         $this->load->model('Ujian_model');
         $this->load->model('Soal_model');
         $this->load->model('Livestream_model');
         $this->load->model('Kelas_model');
         $this->load->model('DataSiswa_model');
         $this->load->model('Tugas_model');
+        $this->load->model('UploadJawabanTugas_model');
         $this->load->library('form_validation');
+        $this->load->helper(array('form', 'url'));
     }
     
     public function index()
@@ -326,52 +327,54 @@ class Siswa extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function submitAnswerTugas($id, $nomor)
+
+    public function unggah_jawaban_tugas($idtugas)
     {
-        $soal = $this->SoalTugas_model->getSoalSiswa($id, $nomor-1)[$nomor-1];
-        $request = $this->input->post();
-        $key = "";
-        $isbenar = -1;
-        $score = 0;
-
-        // echo json_encode($soal);die();
-
-        if($soal['jenissoal'] === 'Esai') {
-            if($this->JawabanTugas_model->insert($soal['id'], $this->session->userdata("id"), $request['jawaban'], 0, 0)) {
-                redirect(base_url("siswa/soaltugas/".$soal['idtugas']."/".$nomor+1));
-            }
+        $data['title'] = 'Upload Jawaban Tugas';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        // $data['tugas'] = $this->Tugas_model->getTugasById($id);
+        // $data['jawaban_tugas'] = $this->UnggahJawabanTugas_model->getAllJawabanTugas();
+        // $data['tugas'] = $this->Tugas_model->getAllTugas($id);
+        $idtugas = intval($this->uri->segment(3));
+        $iduser = intval($data['user']['id']);
+       
+        // $this->form_validation->set_rules('upload_jawaban_tugas', 'Upload Jawaban Tugas', 'required');
+		$this->form_validation->set_rules('up', 'upload', 'required');
+        
+        if( $this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('siswa/upload_jawaban_tugas', $data);
+            $this->load->view('templates/footer');    
         } else {
-            if(array_key_exists("opsi1", $request) && $request["opsi1"] == "on") {
-                $key = 'opsi1';
-                if($soal['opsi1'] === $soal['opsibenar']) {
-                    $isbenar = 1;
-                    $score = 1;
-                }
-            } else if(array_key_exists("opsi2", $request) && $request["opsi2"] == "on") {
-                $key = 'opsi2';
-                if($soal['opsi2'] === $soal['opsibenar']) {
-                    $isbenar = 1;
-                    $score = 1;
-                }
-            } else if(array_key_exists("opsi3", $request) && $request["opsi3"] == "on") {
-                $key = 'opsi3';
-                if($soal['opsi3'] === $soal['opsibenar']) {
-                    $isbenar = 1;
-                    $score = 1;
-                }
-            } else if(array_key_exists("opsi4", $request) && $request["opsi4"] == "on") {
-                $key = 'opsi4';
-                if($soal['opsi4'] === $soal['opsibenar']) {
-                    $isbenar = 1;
-                    $score = 1;
-                }
-            } else return false;
+            $config['upload_path']          = './upload_jawaban_tugas/';
+            $config['allowed_types']        = 'gif|jpg|png|pdf';
+            $config['max_size']             = 100000000;
+            $config['max_width']            = 10000;
+            $config['max_height']           = 10000;
 
-            if($key !== "") {
-                if($this->JawabanTugas_model->insert($soal['id'], $this->session->userdata("id"), $key, $isbenar, $score))
-                    redirect(base_url("siswa/soaltugas/".$id."/".($nomor+1)));
+            $this->load->library('upload', $config);
 
-            } else return false;
+            if ( ! $this->upload->do_upload('upload_jawaban_tugas'))
+            {
+                $error = array('error' => $this->upload->display_errors());
+                
+                // $this->load->view('upload_form', $error);
+                echo json_encode($error);die();
+            } else {
+                $data = array('upload_data' => $this->upload->data());
+				// echo json_encode($data);die();
+                // $this->load->view('upload_success', $data);
+
+                $upload_jawaban_tugas = $this->upload->data();
+                $data["upload"] = $upload_jawaban_tugas;
+                $upload_jawaban_tugas = $upload_jawaban_tugas['file_name'];
+                
+                $this->UploadJawabanTugas_model->uploadJawabanTugas($idtugas, $iduser, $upload_jawaban_tugas);
+                $this->session->set_flashdata('flash', 'Ditambahkan');
+                redirect('siswa/tugas');
+            }
         }
     }
 

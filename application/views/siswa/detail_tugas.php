@@ -55,11 +55,6 @@
                                 : <iframe width="100%" src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px"></iframe>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="upload_jawaban_tugas" class="form-label">Unggah File Jawaban Tugas</label>
-                            <input type="file" name="upload_jawaban_tugas" class="form-control" id="upload_jawaban_tugas">
-                            <div class="form-text text-danger"><?= form_error('upload_jawaban_tugas'); ?></div>
-                        </div>
                     </div>
                     <br>
                     <a href="<?= base_url(); ?>siswa/tugas" class="btn btn-primary">Kembali</a>

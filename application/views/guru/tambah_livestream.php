@@ -43,7 +43,7 @@
                             <div class="form-text text-danger"><?= form_error('waktuselesai'); ?></div>
                         </div>
                         <div class="mb-3">
-                            <label for="video" class="form-label">Video</label>
+                            <label for="video" class="form-label">Judul Video</label>
                             <input type="text" name="video" class="form-control" id="video">
                             <div class="form-text text-danger"><?= form_error('video'); ?></div>
                         </div>

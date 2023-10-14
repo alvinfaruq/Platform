@@ -53,7 +53,7 @@
                             <div class="form-text text-danger"><?= form_error('upload_tugas'); ?></div>
                         </div> 
                         <button type="submit" value="upload" class="btn btn-primary float-right">Tambah Data Tugas</button>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
         </div>

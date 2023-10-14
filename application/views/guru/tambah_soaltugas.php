@@ -5,16 +5,11 @@
 
             <div class="card">
                 <div class="card-header">
-                    Form Tambah Soal
+                    Form Tambah Soal Tugas
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
-                        <!-- <div class="mb-3">
-                            <label for="idujian" class="form-label">Id Ujian</label>
-                            <input type="input" name="idujian" class="form-control" id="idujian" value="<?= $idsoal ?>" readonly>
-                            <div class="form-text text-danger"><?= form_error('idujian'); ?></div>
-                        </div> -->
-                        <input type="hidden" name="idujian" class="form-control" id="idujian" value="<?= $idsoal ?>">
+                    <form action="" method="post">  
+                        <input type="hidden" name="idtugas" class="form-control" id="idtugas" value="<?= $idsoal ?>">
                         <div class="mb-3">
                             <label for="soal" class="form-label">Jenis Soal</label>
                             <select name="jenissoal" id="jenissoal" class="form-control" onchange="jenischange()">
@@ -55,7 +50,7 @@
                             <input type="text" name="opsibenar" class="form-control" id="opsibenar">
                             <div class="form-text text-danger"><?= form_error('opsibenar'); ?></div>
                         </div>
-                        <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Soal</button>
+                        <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data Soal Tugas</button>
                     </form>
                 </div>
             </div>

@@ -36,11 +36,11 @@
                                 Judul
                             </div>
                             <div class="col">
-                                : <?= $livestream['judul'] ?>
+                                : <?= $livestream['video'] ?>
                             </div>
                         </div>
                     </div>
-                    <iframe width="560" height="315" src="<?= $livestream['judul'] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <!-- <iframe width="560" height="315" src="<?= $livestream['video'] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
                     <br>
                     <a href="<?= base_url(); ?>siswa/livestream" class="btn btn-primary">Kembali</a>
                 </div>

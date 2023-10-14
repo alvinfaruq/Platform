@@ -2,11 +2,13 @@
     <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">
+
                 <div class="card-header">
                     Detail Ujian
                 </div>
+                
                 <div class="card-body">
-                    <div class="w-50">
+                    <div class="w-100">
                         <div class="row">
                             <div class="col-3">
                                 Kelas
@@ -56,10 +58,11 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="container-fluid">
                         <div class="card shadow mt-3">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tabel Nilai</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Tabel Penilaian Ujian</h6>
                             </div>
                         </div>
                         <div class="card-body shadow mb-3">
@@ -87,6 +90,7 @@
                         <a href="<?= base_url(); ?>guru/ujian" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -50,7 +50,7 @@
                             <div class="form-text text-danger"><?= form_error('upload_materi'); ?></div>
                         </div>
                         <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data Materi Pelajaran</button>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
         </div>
