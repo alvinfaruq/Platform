@@ -44,6 +44,11 @@ class DataGuru_model extends CI_Model{
 
         $this->db->update('user', $data, ['id' => $id]);
     }
+
+    function simpanNilai($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}	
 }
 
 ?>

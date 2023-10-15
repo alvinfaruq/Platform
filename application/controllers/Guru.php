@@ -15,6 +15,7 @@ class Guru extends CI_Controller
         $this->load->model('Tugas_model');
         $this->load->model('DataSiswa_model');
         $this->load->model('UploadJawabanTugas_model');
+        $this->load->model('DataGuru_model');
         $this->load->library('form_validation');
     }
 
@@ -935,6 +936,14 @@ class Guru extends CI_Controller
             $this->session->set_flashdata('flash', 'Diubah');
             redirect('guru/listSiswa');
         }
+    }
+
+    public function simpanNilai(){
+        $form_data = $this->input->post();
+        $idtugas = $form_data['idtugas'];
+        
+        $this->DataGuru_model->simpanNilai(['id_jawaban_tugas'=>$form_data['idjawaban']], ['nilai'=>$form_data['nilai']],'tugas_jawaban');
+        redirect('guru/detail_tugas/'.$idtugas.'');
     }
     
 
