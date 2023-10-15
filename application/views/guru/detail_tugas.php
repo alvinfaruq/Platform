@@ -52,7 +52,7 @@
                                 Unggahan File Tugas
                             </div>
                             <div class="col">
-                                <!-- : <iframe width="100%" src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px"></iframe> -->
+                                : <iframe width="100%" src="<?= base_url('upload_tugas/').$tugas['upload_tugas'] ?>" height="500px"></iframe>
                             </div>
                         </div>
                     </div>

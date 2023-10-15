@@ -811,8 +811,10 @@ class Guru extends CI_Controller
 
     public function hapus_tugas($id)
     {
+        $this->load->helper('file');
         $tugas = $this->Tugas_model->getTugasById($id);
-        unlink('./upload_tugas/'.$tugas["detail"]["upload_tugas"]);
+        $tes = unlink('./upload_tugas/'.$tugas["tgs"]["upload_tugas"]);
+        
         $this->Tugas_model->hapusTugas($id);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('guru/tugas');

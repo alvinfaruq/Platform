@@ -21,6 +21,7 @@
                                     <th>Mata Pelajaran</th>
                                     <th>Judul Tugas</th>
                                     <th>Jenis Tugas</th>
+                                    <th>Nilai</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,7 @@
                                         <td><?= $t['nama'] ?></td>
                                         <td><?= $t['judul_tugas'] ?></td>
                                         <td><?= $t['jenis_tugas'] ?></td>
+                                        <td><?= $t['nilai'] ?></td>
                                         <td>
                                             <a href="<?= base_url(); ?>siswa/detail_tugas/<?= $t['id_tugas']; ?>" class="badge badge-primary float right">Detail</a>
                                             <a href="<?= base_url(); ?>siswa/unggah_jawaban_tugas/<?= $t['id_tugas']; ?>" class="badge badge-warning float right">Submit</a>

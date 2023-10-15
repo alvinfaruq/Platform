@@ -302,7 +302,7 @@ class Siswa extends CI_Controller
         $data['title'] = 'Tugas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         // $data['tugas'] = $this->db->get('tugas')->result_array();
-        $data['tugas'] = $this->Tugas_model->getAllTugas();
+        $data['tugas'] = $this->Tugas_model->tugasSiswa();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -317,7 +317,7 @@ class Siswa extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         // $data['tugas'] = $this->Tugas_model->getTugasById($id);
 
-        $data['tugas'] = $this->Tugas_model->getAllTugas($id);
+        $data['tugas'] = $this->Tugas_model->tugasSiswa($id);
         // echo json_encode($data);die();
 
         $this->load->view('templates/header', $data);
@@ -327,10 +327,9 @@ class Siswa extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-
     public function unggah_jawaban_tugas($idtugas)
     {
-        $data['title'] = 'Upload Jawaban Tugas';
+        $data['title'] = 'Unggah Jawaban Tugas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         // $data['tugas'] = $this->Tugas_model->getTugasById($id);
         // $data['jawaban_tugas'] = $this->UnggahJawabanTugas_model->getAllJawabanTugas();
@@ -372,7 +371,7 @@ class Siswa extends CI_Controller
                 $upload_jawaban_tugas = $upload_jawaban_tugas['file_name'];
                 
                 $this->UploadJawabanTugas_model->uploadJawabanTugas($idtugas, $iduser, $upload_jawaban_tugas);
-                $this->session->set_flashdata('flash', 'Ditambahkan');
+                $this->session->set_flashdata('flash', 'Diunggah');
                 redirect('siswa/tugas');
             }
         }
