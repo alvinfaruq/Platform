@@ -1,0 +1,1 @@
+ALTER TABLE `tugas_jawaban` ADD `nilai` INT(3) NOT NULL AFTER `upload_jawaban_tugas`;
