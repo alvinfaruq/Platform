@@ -327,9 +327,9 @@ class Siswa extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function unggah_jawaban_tugas($idtugas)
+    public function upload_jawaban_tugas($idtugas)
     {
-        $data['title'] = 'Unggah Jawaban Tugas';
+        $data['title'] = 'Upload Jawaban Tugas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         // $data['tugas'] = $this->Tugas_model->getTugasById($id);
         // $data['jawaban_tugas'] = $this->UnggahJawabanTugas_model->getAllJawabanTugas();
